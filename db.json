@@ -1,0 +1,116 @@
+{
+  "test-category": [
+    {
+      "id": 1,
+      "categoryName": "Trial Week",
+      "isDeleted": false,
+      "active": 1,
+      "createdDate": "2022-12-25 10:02:34"
+    },
+    {
+      "id": 2,
+      "categoryName": "JavaScript Fundamentals",
+      "isDeleted": false,
+      "active": 1,
+      "createdDate": "2022-10-06 10:02:34"
+    },
+    {
+      "id": 3,
+      "categoryName": "Drawing and Animation using Processing JS",
+      "isDeleted": false,
+      "active": 1,
+      "createdDate": "2022-10-06 10:02:34"
+    },
+    {
+      "id": 4,
+      "categoryName": "If/Else problems with Truth Table and Unit Tests",
+      "isDeleted": false,
+      "active": 1,
+      "createdDate": "2022-10-06 10:02:34"
+    },
+    {
+      "id": 5,
+      "categoryName": "1-Dimension Array Problems With Spreadsheet Tracing & Unit Test",
+      "isDeleted": false,
+      "active": 1,
+      "createdDate": "2022-10-06 10:02:34"
+    },
+    {
+      "id": 6,
+      "categoryName": "Star Pattern Problems using Strings With Spreadsheet Visualization & Unit Test",
+      "isDeleted": false,
+      "active": 1,
+      "createdDate": "2022-10-06 10:02:34"
+    },
+    {
+      "id": 7,
+      "categoryName": "Basic Algorithm Understanding",
+      "isDeleted": false,
+      "active": 1,
+      "createdDate": "2022-10-06 10:02:34"
+    },
+    {
+      "id": 8,
+      "categoryName": "Basic HTML & CSS",
+      "isDeleted": false,
+      "active": 1,
+      "createdDate": "2022-10-06 10:02:34"
+    },
+    {
+      "id": 9,
+      "categoryName": "Magic Square",
+      "isDeleted": false,
+      "active": 1,
+      "createdDate": "2022-10-06 10:02:34"
+    },
+    {
+      "id": 10,
+      "categoryName": "HTML-CSS",
+      "isDeleted": false,
+      "active": 1,
+      "createdDate": "2022-10-06 10:02:34"
+    },
+    {
+      "id": 11,
+      "categoryName": "HTML-CSS & LinkList",
+      "isDeleted": false,
+      "active": 1,
+      "createdDate": "2022-10-06 10:02:34"
+    },
+    {
+      "id": 12,
+      "categoryName": "Linked Lists",
+      "isDeleted": false,
+      "active": 1,
+      "createdDate": "2022-10-06 10:02:34"
+    },
+    {
+      "id": 13,
+      "categoryName": "Double Linked List",
+      "isDeleted": false,
+      "active": 1,
+      "createdDate": "2022-10-06 10:02:34"
+    },
+    {
+      "id": 14,
+      "categoryName": "Array vs Linklist & Angular",
+      "isDeleted": false,
+      "active": 1,
+      "createdDate": "2022-10-06 10:02:34"
+    },
+    {
+      "id": 15,
+      "categoryName": "trial trial",
+      "active": true,
+      "createdDate": "16-03-2023 07:41 PM",
+      "isDeleted": true
+    },
+    {
+      "categoryName": "tria 2",
+      "active": true,
+      "createdDate": "16-03-2023 07:54 PM",
+      "isDeleted": true,
+      "id": 16
+    }
+  ]
+}

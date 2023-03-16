@@ -1,0 +1,44 @@
+<!-- This code shows a form for adding details of a category with reactive forms in Angular. -->
+<div class="main-content center">
+    <!-- The main content of the page is centered using CSS. -->
+    <h1>Reactive Forms</h1>
+    <!-- A heading for the page. -->
+    <h2>Test Category Details</h2>
+    <!-- A heading for the category details section. -->
+    <div class="mat-elevation-z16">
+        <!-- A material design card is used for styling and elevation. -->
+        <mat-card>
+            <!-- A material design card is used for styling and elevation. -->
+            <mat-card-content>
+                <!-- The content of the card goes inside this tag. -->
+                <form class="dataform" [formGroup]="categoryDetailsForm">
+                    <!-- A reactive form is created with formGroup directive that binds to categoryDetailsForm property. -->
+                    <mat-form-field appearance="fill">
+                        <!-- A material design form field for input. -->
+                        <mat-label>Category name</mat-label>
+                        <!-- A label for the input field. -->
+                        <input matInput required formControlName="categoryName" />
+                        <!-- An input field for category name with required validation and formControlName directive that binds to categoryName property. -->
+                        <mat-error>
+                            {{ showErrorMessage('categoryName') }}</mat-error>
+                        <!-- An error message is shown when the input field is invalid. -->
+                    </mat-form-field>
+                    <br /><br />
+                    <mat-checkbox formControlName="active">Active</mat-checkbox>
+                    <!-- A checkbox for category status with formControlName directive that binds to active property. -->
+                </form>
+            </mat-card-content>
+            <mat-card-actions>
+                <!-- The actions of the card go inside this tag. -->
+                <button mat-flat-button color="warn" (click)="cancelForm()">Cancel</button>
+                <!-- A button for cancelling the form. -->
+                <button mat-flat-button color="accent" (click)="resetForm()"
+                    [disabled]="!categoryDetailsForm.dirty">Reset</button>
+                <!-- A button for resetting the form, disabled when the form is not dirty. -->
+                <button mat-flat-button color="primary" (click)="saveForm()"
+                    [disabled]="!categoryDetailsForm.valid || !categoryDetailsForm.dirty">Save</button>
+                <!-- A button for saving the form, disabled when the form is not valid or not dirty. -->
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

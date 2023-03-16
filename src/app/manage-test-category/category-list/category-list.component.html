@@ -1,0 +1,76 @@
+<!-- The main content of the page is enclosed in a div element with a class of 'main-content'. -->
+<div class="main-content">
+    <!-- This is a card element with a z-depth of 16. -->
+    <div class="mat-elevation-z16">
+
+        <!-- This div contains a filter bar and a title for the category list. -->
+        <div class="buttonAndFilter">
+
+            <!-- This div contains a search filter field for the category list. -->
+            <div class="filterBar">
+                <!-- This is an Angular Material form field with an input box for text. -->
+                <mat-form-field>
+                    <input matInput type="text" placeholder="Filter" (keyup)="doFilter($any($event).target.value)">
+                </mat-form-field>
+            </div>
+
+            <!-- This div contains a header title for the category list. -->
+            <div>
+                <h1>Category List</h1>
+            </div>
+
+            <!-- This button is for creating a new category. -->
+            <button mat-mini-fab color="primary" (click)="createCategory()">
+                <mat-icon>add</mat-icon>
+            </button>
+
+        </div>
+
+        <!-- This is an Angular Material table element with a data source. -->
+        <table mat-table [dataSource]="dataSource">
+
+            <!-- This is a column definition for the category name. -->
+            <ng-container matColumnDef="categoryName">
+                <th mat-header-cell *matHeaderCellDef>Category Name</th>
+                <td mat-cell *matCellDef="let element">{{ element.categoryName }}</td>
+            </ng-container>
+
+            <!-- This is a column definition for whether the category is active or not. -->
+            <ng-container matColumnDef="active">
+                <th mat-header-cell *matHeaderCellDef>Active</th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-checkbox disabled [checked]="element.active"></mat-checkbox>
+                </td>
+            </ng-container>
+
+            <!-- This is a column definition for the created date of the category. -->
+            <ng-container matColumnDef="createdDate">
+                <th mat-header-cell *matHeaderCellDef>Created Date</th>
+                <td mat-cell *matCellDef="let element">{{ element.createdDate }}</td>
+            </ng-container>
+
+            <!-- This is a column definition for the actions that can be performed on a category. -->
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Actions</th>
+                <td mat-cell *matCellDef="let element">
+                    <!-- This button is for editing the selected category. -->
+                    <button mat-icon-button color="primary" (click)="editCategory(element.id)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <!-- This button is for deleting the selected category. -->
+                    <button mat-icon-button color="warn" (click)="deleteCategory(element)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <!-- This is a row definition for the table header row. -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+            <!-- This is a row definition for the table rows. -->
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+        </table>
+    </div>
+
+</div>
