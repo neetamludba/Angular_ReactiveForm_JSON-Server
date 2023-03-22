@@ -3,26 +3,28 @@
     <!-- This is a card element with a z-depth of 16. -->
     <div class="mat-elevation-z16">
 
+        <!-- This div contains a header title for the category list. -->
+        <div class="main-heading">
+            <h1>Category List</h1>
+        </div>
+
         <!-- This div contains a filter bar and a title for the category list. -->
         <div class="buttonAndFilter">
 
             <!-- This div contains a search filter field for the category list. -->
-            <div class="filterBar">
+            <div class="filterBar main-padding-left">
                 <!-- This is an Angular Material form field with an input box for text. -->
                 <mat-form-field>
                     <input matInput type="text" placeholder="Filter" (keyup)="doFilter($any($event).target.value)">
                 </mat-form-field>
             </div>
 
-            <!-- This div contains a header title for the category list. -->
-            <div>
-                <h1>Category List</h1>
-            </div>
-
             <!-- This button is for creating a new category. -->
-            <button mat-mini-fab color="primary" (click)="createCategory()">
-                <mat-icon>add</mat-icon>
-            </button>
+            <div class="main-padding-right">
+                <button mat-mini-fab color="primary" (click)="createCategory()">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
 
         </div>
 
@@ -58,7 +60,7 @@
                         <mat-icon>edit</mat-icon>
                     </button>
                     <!-- This button is for deleting the selected category. -->
-                    <button mat-icon-button color="warn" (click)="deleteCategory(element)">
+                    <button mat-icon-button color="warn" (click)="deleteCategory(element.id)">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </td>

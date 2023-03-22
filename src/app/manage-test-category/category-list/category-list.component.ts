@@ -88,16 +88,12 @@ export class CategoryListComponent implements AfterViewInit {
   }
 
   // This function takes in a categoryId number and deletes the corresponding category
-  deleteCategory(categoryData: any) {
+  deleteCategory(categoryId: any) {
     
-    categoryData.isDeleted = true;
+   
     // Calls the deleteCategory method from the testCategoryService with an object containing the categoryId and a flag isDeleted set to true.
-    this.testCategoryService.deleteCategory(categoryData)
-      // The Promise returned from the deleteCategory method is then resolved with an array of categories.
-      .then((categories) => {
-        // The categories array is filtered to only include objects where the isDeleted flag is false.
-        console.table(categories);
-      });
+    this.testCategoryService.deleteCategory(categoryId)
+    .catch((ex)=> console.log(ex));
 
       this.getCategories();
   }
