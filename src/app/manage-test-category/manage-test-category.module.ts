@@ -11,14 +11,16 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatTableModule } from '@angular/material/table'
+import { MatTableModule } from '@angular/material/table';
+import { CategoryListDeletedComponent } from './category-list-deleted/category-list-deleted.component'
 
 
 
 @NgModule({
   declarations: [
     CategoryDetailsComponent,
-    CategoryListComponent
+    CategoryListComponent,
+    CategoryListDeletedComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,97 @@
+<div class="main-content">
+    <div class="mat-elevation-z8">
+      <mat-card>
+        <mat-card-content>
+          <form class="dataform" [formGroup]="testDetailsForm">
+            <mat-form-field appearance="fill">
+              <mat-label>Description</mat-label>
+              <input matInput required formControlName="description" />
+              <mat-error *ngIf="testDetailsForm.get('description')?.errors">
+                {{ showErrorMessage("description") }}
+              </mat-error>
+            </mat-form-field>
+            <br />
+            <mat-form-field appearance="fill">
+              <mat-label>Test Category</mat-label>
+              <mat-select (change)="changeCategory($event)" formControlName="categoryID">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let tc of testCategories" [value]="tc.id">
+                  {{ tc.categoryName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <br />
+            <mat-checkbox formControlName="active">Active</mat-checkbox>
+          </form>
+          <div class="mat-elevation-z4 question-list-section">
+            <!-- <div class="filterBar">
+              <mat-form-field>
+                <input matInput type="text" placeholder="Filter" (keyup)="doFilter($any($event).target.value)" />
+              </mat-form-field>
+              <button mat-mini-fab color="primary" (click)="editQuestion(-1)">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div> -->
+            <!-- <table class="listtable" mat-table [dataSource]="dsQuestions" matSort>
+              <ng-container matColumnDef="question">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Question
+                </th>
+                <td mat-cell *matCellDef="let element">{{ element.question }}</td>
+              </ng-container>
+  
+              <ng-container matColumnDef="questionType">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.questionType }}
+                </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="displayOrder">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Display Order
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.displayOrder }}
+                </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="active">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Active</th>
+                <td mat-cell *matCellDef="let element">
+                  <mat-checkbox disabled [checked]="element.active">
+                  </mat-checkbox>
+                </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Actions</th>
+                <td mat-cell *matCellDef="let element; let i = index">
+                  <a class="iconbutton" (click)="editQuestion(i)" mat-icon-button>
+                    <mat-icon color="primary">edit</mat-icon>
+                  </a>
+                  <button class="iconbutton" mat-icon-button>
+                    <mat-icon color="warn">delete</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+  
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
+            </table> -->
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <!-- The actions of the card go inside this tag. -->
+            <button class="button" mat-flat-button color="warn" (click)="closeForm()">Cancel</button>
+            <!-- A button for cancelling the form. -->
+            <button class="button" mat-flat-button color="accent" (click)="resetForm()"
+                [disabled]="!testDetailsForm.dirty">Reset</button>
+            <!-- A button for resetting the form, disabled when the form is not dirty. -->
+            <button class="button" mat-flat-button color="primary" (click)="saveTest()"
+                [disabled]="!testDetailsForm.valid || !testDetailsForm.dirty">Save</button>
+            <!-- A button for saving the form, disabled when the form is not valid or not dirty. -->
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>

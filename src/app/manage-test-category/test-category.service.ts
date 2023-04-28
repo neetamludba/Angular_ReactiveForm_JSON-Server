@@ -84,5 +84,12 @@ export class TestCategoryService {
       .catch((ex) => console.log(ex));
   }
 
+  async unDeleteCategory(categoryId: number): Promise<any> {
+    const url = `${this.jsonServerURL}/${categoryId}`;
+    return this.http.patch(url, { isDeleted: false }, this.options)
+    .toPromise()
+    .catch((ex) => console.log(ex));
+  }
+
 
 }

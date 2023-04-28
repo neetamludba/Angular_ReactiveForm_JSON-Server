@@ -1,5 +1,3 @@
-// In this section, we are importing the necessary modules and services that we will use in our component. 
-// The Component and AfterViewInit are classes from the Angular core module. 
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
 
 // We are importing MatTableDataSource and MatSort from the @angular/material module, 
@@ -14,25 +12,18 @@ import { Router } from '@angular/router';
 import { TestCategory } from 'src/app/models/category.model';
 import { TestCategoryService } from '../test-category.service';
 
-// Here, we are defining the component decorator with a selector that we can use to include this component in other templates. 
-// We also specify the template URL and style URLs for this component.
-
-
 @Component({
-  selector: 'app-category-list',
-  templateUrl: './category-list.component.html',
-  styleUrls: ['./category-list.component.css']
+  selector: 'app-category-list-deleted',
+  templateUrl: './category-list-deleted.component.html',
+  styleUrls: ['./category-list-deleted.component.css']
 })
-
-// This is the main body of the component class. Here, we define the component's properties and methods. 
-export class CategoryListComponent implements AfterViewInit {
-
-  // The constructor method is called when the component is initialized and it injects the Router and TestCategoryService services into the component.
-  constructor(
-    private router: Router,
-    private testCategoryService: TestCategoryService
-  ) { }
-
+export class CategoryListDeletedComponent implements AfterViewInit{
+    
+    constructor(
+      public router: Router,
+      private testCategoryService: TestCategoryService
+    ) { } // A constructor that injects Router, ActivatedRoute, and TestCategoryService dependencies
+  
   // We use ViewChild decorator to access the MatSort instance and assign it to the sort property of the component.
   @ViewChild(MatSort)
   sort: MatSort = new MatSort();
@@ -44,7 +35,7 @@ export class CategoryListComponent implements AfterViewInit {
 
   // The ngAfterViewInit method is called after the view is initialized, and it calls the getCategories method to populate the table with data.
   ngAfterViewInit() {
-    this.getAllCategories();
+    this.getAllDeletedCategories();
   }
 
   // The doFilter method is used to filter the data source when the user types in the filter input field.
@@ -54,13 +45,13 @@ export class CategoryListComponent implements AfterViewInit {
 
   // The getCategories method calls the getAllCategories method of the TestCategoryService to fetch all categories from the backend. 
   // It then assigns the resulting array to the dataSource property and sets the MatSort instance to the sort property of the data source.
-  getAllCategories() {
+  getAllDeletedCategories() {
     this.testCategoryService.getAllCategories()
       // The Promise returned from the deleteCategory method is then resolved with an array of categories.
       .then((categories) => {
         // The categories array is filtered to only include objects where the isDeleted flag is false.
         let filteredCategories = categories.filter((object: { isDeleted: boolean }) => {
-          return object.isDeleted == false
+          return object.isDeleted == true
         });
         // The filtered categories are set as the dataSource for a MatTable, which is used to display the categories.
         this.dataSource = new MatTableDataSource<TestCategory>(filteredCategories);
@@ -71,35 +62,20 @@ export class CategoryListComponent implements AfterViewInit {
 
   }
 
-  // The createCategory method navigates to the testCategory/create
-  createCategory() {
-    this.router.navigateByUrl('testCategory/create').catch((error) => {
-      console.log(error);
-    });
-  }
 
-  // The editCategory method navigates to the testCategory/:id
-  editCategory(categoryId: number) {
-    this.router.navigateByUrl('testCategory/' + categoryId).catch((error) => {
-      console.log(error);
-    });
 
-  }
 
   // This function takes in a categoryId number and deletes the corresponding category
-  deleteCategory(categoryId: any) {
+  unDeleteCategory(categoryId: any) {
     // Calls the deleteCategory method from the testCategoryService with an object containing the categoryId and a flag isDeleted set to true.
-    this.testCategoryService.deleteCategory(categoryId)
+    this.testCategoryService.unDeleteCategory(categoryId)
     .catch((ex)=> console.log(ex));
+    this.getAllDeletedCategories();
 
-      this.getAllCategories();
   }
-
-  gotoDeletedCategories(){
-    this.router.navigateByUrl('testCategory/deleted').catch((error) => {
-      console.log(error);
-    });
+  
+  backToCategories(){
+    this.router.navigateByUrl('testCategory').catch((error) =>
+    console.log(error));
   }
-
 }
-

@@ -15,7 +15,7 @@ import { formatDate } from '@angular/common';  // Importing formatDate function 
 export class CategoryDetailsComponent implements OnInit {  // A class that defines the behavior of the component and implements the OnInit interface
   
   constructor(
-    private router: Router,
+    public router: Router,
     private route: ActivatedRoute,
     private testCategoryService: TestCategoryService
   ) { } // A constructor that injects Router, ActivatedRoute, and TestCategoryService dependencies
@@ -33,7 +33,7 @@ export class CategoryDetailsComponent implements OnInit {  // A class that defin
   }
 
   categoryDetailsForm = new FormGroup({ // A new instance of FormGroup that defines the form controls and their validators
-    categoryName: new FormControl(null, [
+    categoryName: new FormControl('', [
       Validators.required,
       Validators.minLength(5),
     ]),
@@ -42,7 +42,7 @@ export class CategoryDetailsComponent implements OnInit {  // A class that defin
 
   categoryId: number = 0; // A property that holds the category ID
   currentDate = new Date; // A property that holds the current date
-  categoryDate = formatDate(this.currentDate, 'dd-MM-yyyy hh:mm a', 'en-US'); // A property that holds the formatted current date using the formatDate function
+  categoryDate = formatDate(this.currentDate, 'yyyy-MM-dd hh:mm a', 'en-US'); // A property that holds the formatted current date using the formatDate function
 
   showErrorMessage(fieldName: string) { // A method that returns an error message based on the form control's validation errors
     let errors = this.categoryDetailsForm.get(fieldName)?.errors; // Getting the validation errors of the specified form control

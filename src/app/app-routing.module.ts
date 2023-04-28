@@ -5,12 +5,16 @@ import { RouterModule, Routes } from '@angular/router';
 // Importing the components used in the routing module
 import { CategoryDetailsComponent } from './manage-test-category/category-details/category-details.component';
 import { CategoryListComponent } from './manage-test-category/category-list/category-list.component';
+import { CategoryListDeletedComponent } from './manage-test-category/category-list-deleted/category-list-deleted.component';
+import { TestListComponent } from './manage-test/test-list/test-list.component';
+import { TestDetailsComponent } from './manage-test/test-details/test-details.component';
+import { TestListDeletedComponent } from './manage-test/test-list-deleted/test-list-deleted.component';
 
 // Creating an array of routes for the application
 const routes: Routes = [
   {
     path: '',
-    component: CategoryListComponent,
+    component: TestListComponent,
     pathMatch: 'full'
   },
   {
@@ -29,10 +33,37 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'testCategory/deleted',
+    component: CategoryListDeletedComponent,
+    pathMatch: 'full'
+  },
+  {
     path: 'testCategory/:id',
     component: CategoryDetailsComponent,
     pathMatch: 'full'
+  },
+
+  {
+    path: 'test',
+    component: TestListComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'test/create',
+    component: TestDetailsComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'test/deleted',
+    component: TestListDeletedComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'test/:id',
+    component: TestDetailsComponent,
+    pathMatch: 'full'
   }
+ 
 ];
 
 // Configuring and exporting the Angular routing module

@@ -1,0 +1,96 @@
+<div class="main-content">
+  <div class="mat-elevation-z8">
+    <div class="main-heading">
+      <h1>Test List</h1>
+    </div>
+
+    <div class="buttonAndFilter">
+
+      <div class="filterBar main-padding-left">
+        <mat-form-field>
+          <input matInput type="text" placeholder="Filter" (keyup)="doFilter($any($event).target.value)">
+        </mat-form-field>
+      </div>
+
+
+      <div class="main-padding-right">
+        <button mat-mini-fab color="primary" (click)="createTest()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+
+    </div>
+
+    <table class="listtable" mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+        <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
+        <td mat-cell *matCellDef="let element">
+          <div *ngFor="let tc of testCategories">
+            <div *ngIf="tc.id == element.categoryID && tc.isDeleted == false">
+              {{tc.categoryName}}
+            </div>
+
+            <div *ngIf="tc.id == element.categoryID && tc.isDeleted == true">
+              Deleted Category "{{tc.categoryName}}"
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="active">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Active</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox disabled [checked]="element.active"> </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="createdDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Created Date</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.createdDate | date }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+          <a class="iconbutton" [routerLink]="['/test', element.id]" mat-icon-button>
+            <mat-icon color="primary">edit</mat-icon>
+          </a>
+          <button class="iconbutton" mat-icon-button (click)="deleteTest(element.id)">
+            <mat-icon color="warn">delete</mat-icon>
+          </button>
+          <!-- <a class="iconbutton" [routerLink]="['/testassignment', element.testID]" mat-icon-button>
+            <mat-icon color="secondary">person_add</mat-icon>
+          </a>
+          <a class="iconbutton" [routerLink]="['/testattemptstats', element.testID]" mat-icon-button>
+            <mat-icon color="secondary">analytics</mat-icon>
+          </a> -->
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <!-- <mat-paginator
+      showFirstLastButtons
+      aria-label="Select page of test category"
+    >
+    </mat-paginator> -->
+  </div>
+
+  <div>
+    <button class='addTestButton' mat-flat-button color="warn" (click)="gotoDeletedTests()">
+      Deleted Tests
+    </button>
+  </div>
+
+</div>
+
+<!-- [pageSizeOptions]="[5, 10, 20]" -->

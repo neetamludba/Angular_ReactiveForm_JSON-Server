@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { ManageTestCategoryModule } from './manage-test-category/manage-test-category.module';
+import { ManageTestModule } from './manage-test/manage-test.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -15,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     ManageTestCategoryModule,
+    ManageTestModule,
     BrowserAnimationsModule
   ],
   providers: [],
