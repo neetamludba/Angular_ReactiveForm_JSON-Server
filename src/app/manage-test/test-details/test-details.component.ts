@@ -19,11 +19,11 @@ export class TestDetailsComponent {
   ) { }
   
   testDetailsForm = new FormGroup({
-    description: new FormControl(null, [
+    description: new FormControl('', [
       Validators.required,
       Validators.minLength(5),
     ]),
-    categoryID: new FormControl(null),
+    categoryID: new FormControl(''),
     active: new FormControl(true),
   });
 
@@ -33,19 +33,19 @@ export class TestDetailsComponent {
 
   testCategories: TestCategory[] = [];
 
-  displayedColumns: string[] = [
-    'question',
-    'questionType',
-    'displayOrder',
-    'active',
-    'actions',
-  ];
+  // displayedColumns: string[] = [
+  //   'question',
+  //   'questionType',
+  //   'displayOrder',
+  //   'active',
+  //   'actions',
+  // ];
 
   @ViewChild(MatSort)
   sort: MatSort = new MatSort();
 
   ngOnInit(): void {
-    this.getTestCategoris();
+    this.getTestCategories();
 
     let id = Number(this.route.snapshot.paramMap.get('id'));
 
@@ -72,7 +72,7 @@ export class TestDetailsComponent {
     // this.dsQuestions.filter = value.trim().toLocaleLowerCase();
   }
 
-  getTestCategoris() {
+  getTestCategories() {
     this.testService
       .getAllCategories()
       .then((categories) => {
@@ -82,11 +82,13 @@ export class TestDetailsComponent {
   }
 
   changeCategory(e: any) {
-    this.testDetailsForm.setValue({
-      categoryID: e.target.value,
-      description: null,
-      active: null
-    });
+    this.testDetailsForm.setValue(
+      {
+        categoryID: e.target.value,
+        description: null,
+        active: null
+      }
+    );
   }
 
   getTest(testId: number) {

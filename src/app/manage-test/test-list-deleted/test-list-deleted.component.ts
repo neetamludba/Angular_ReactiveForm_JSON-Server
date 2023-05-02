@@ -37,7 +37,7 @@ export class TestListDeletedComponent implements AfterViewInit {
     'active',
     'createdDate',
     'actions',
-  ]; 
+  ];
   dataSource = new MatTableDataSource<Test>([]);
 
   testCategories: TestCategory[] = [];
@@ -87,6 +87,7 @@ export class TestListDeletedComponent implements AfterViewInit {
     // Calls the deleteCategory method from the testCategoryService with an object containing the categoryId and a flag isDeleted set to true.
     this.testService.unDeleteTest(testId)
       .catch((ex) => console.log(ex));
+    this.getAllTestCategories();
     this.getAllDeletedTest();
 
   }

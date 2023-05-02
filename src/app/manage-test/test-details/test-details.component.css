@@ -1,3 +1,15 @@
 .button{
     margin:10px;
 }
+
+.centerButton{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+.center{
+    text-align: center;
+}
+
+
+

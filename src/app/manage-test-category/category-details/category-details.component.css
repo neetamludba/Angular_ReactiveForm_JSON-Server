@@ -4,3 +4,9 @@
 button{
     margin-left: 20px;
 }
+.centerButton{
+    margin: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}

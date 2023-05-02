@@ -33,8 +33,9 @@ export class TestListComponent implements AfterViewInit {
   sort: MatSort = new MatSort();
 
   ngAfterViewInit() {
-    this.getAllTest();
     this.getAllTestCategories();
+    this.getAllTest();
+
   }
 
   public doFilter(value: string) {
@@ -70,6 +71,7 @@ export class TestListComponent implements AfterViewInit {
     this.testService.deleteTest(testId)
       .catch((ex) => console.log(ex));
 
+    this.getAllTestCategories();
     this.getAllTest();
   }
 

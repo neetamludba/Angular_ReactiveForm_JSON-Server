@@ -36,7 +36,7 @@
             </div>
 
             <div *ngIf="tc.id == element.categoryID && tc.isDeleted == true">
-              Deleted Category "{{tc.categoryName}}"
+              <span class="deleted">Deleted</span> "{{tc.categoryName}}"
             </div>
           </div>
         </td>

@@ -12,3 +12,6 @@
 .main-padding-right{
     padding-right: 20px;
 }
+.deleted{
+    color: red;
+}

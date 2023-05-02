@@ -7,17 +7,32 @@ import { AppComponent } from './app.component';
 import { ManageTestCategoryModule } from './manage-test-category/manage-test-category.module';
 import { ManageTestModule } from './manage-test/manage-test.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { NavigationComponent } from './navigation/navigation.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+
+
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ManageTestCategoryModule,
     ManageTestModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatListModule
+
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
