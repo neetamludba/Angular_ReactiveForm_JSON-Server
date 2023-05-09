@@ -10,6 +10,36 @@
 .center{
     text-align: center;
 }
+.addTestButton{
+    margin: 20px;
+    margin-top: 30px;
+}
+.main-heading{
+    margin-top: 10px;
+    text-align: center;
+    padding: 20px;
+}
+.main-padding-left{
+    padding-left: 20px;
+}
+.main-padding-right{
+    padding-right: 20px;
+}
+.deleted{
+    color: red;
+}
+.columntest {
+    float: left;
+    width: 30%;
+    padding: 10px;
+  }
+  
+  /* Clear floats after the columns */
+  .rowtest:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 
 
 

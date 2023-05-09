@@ -1,0 +1,61 @@
+<h2 mat-dialog-title>Question Details</h2>
+<mat-dialog-content [formGroup]="questionDetailsForm">
+
+    <mat-label><b>Question</b></mat-label>
+
+    <angular-editor id="questionEditor" [config]="editorConfig" formControlName="question">
+        <ng-template #customButtons let-executeCommandFn="executeCommandFn">
+            <ae-toolbar-set>
+            </ae-toolbar-set>
+        </ng-template>
+    </angular-editor>
+    <br />
+    <div>
+        <mat-label><b>Type</b></mat-label><br />
+        <mat-radio-group formControlName="questionType">
+            <mat-radio-button value="1">Single Choice</mat-radio-button>&nbsp;&nbsp;
+            <mat-radio-button value="2">Multi Choice</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <br />
+    <div class="mat-elevation-z4 question-list-section">
+        <div class="actionBar">
+            <div><b>Choices</b></div>
+            <button mat-mini-fab color="primary" (click)="addOption()">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+        <div class="errorBar">
+            <mat-error class="">{{ errorMessage }}</mat-error>
+        </div>
+        <ng-container formArrayName="optionsArray">
+            <ng-container *ngFor="let optionForm of options.controls; let i = index">
+                <div [formGroupName]="i" class="option-row">
+                    <div class="questionIndexCol">{{ i + 1 }}</div>
+                    <div class="questionOptionCol">
+                        <mat-form-field appearance="outline" [style.width.%]="100">
+                            <input matInput formControlName="value" />
+                        </mat-form-field>
+                    </div>
+                    <div class="questionCorrectAnsCol">
+                        <mat-checkbox formControlName="correctAnswer"></mat-checkbox>
+                    </div>
+                    <div class="questionDeleteCol">
+                        <mat-icon color="warn" (click)="deleteOption(i)" class="questionDeleteOption">delete</mat-icon>
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
+    </div>
+    <mat-checkbox formControlName="mandatory">Is Mandatory</mat-checkbox>
+    <br />
+    <mat-checkbox formControlName="active">Active</mat-checkbox>
+    <br />
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-flat-button mat-dialog-close>Cancel</button>
+    <button mat-flat-button color="primary" (click)="saveQuestion()"
+        [disabled]="!questionDetailsForm.valid || !questionDetailsForm.dirty">
+        Save
+    </button>
+</mat-dialog-actions>

@@ -6,18 +6,24 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { TestCategory } from 'src/app/models/category.model';
 import { formatDate } from '@angular/common';
+import { Question } from 'src/app/models/question.model';
+import { MatDialog } from '@angular/material/dialog';
+import { QuestionDetailsComponent } from 'src/app/manage-question/question-details/question-details.component';
+
 @Component({
   selector: 'app-test-details',
   templateUrl: './test-details.component.html',
   styleUrls: ['./test-details.component.css']
 })
+
 export class TestDetailsComponent {
   constructor(
     private testService: TestService,
     private route: ActivatedRoute,
     private router: Router,
+    private dialog: MatDialog
   ) { }
-  
+
   testDetailsForm = new FormGroup({
     description: new FormControl('', [
       Validators.required,
@@ -32,14 +38,15 @@ export class TestDetailsComponent {
   testDate = formatDate(this.currentDate, 'dd-MM-yyyy hh:mm a', 'en-US'); // A property that holds the formatted current date using the formatDate function
 
   testCategories: TestCategory[] = [];
+  testQuestions: any=[];
+  dsQuestions = new MatTableDataSource<Question>([]);
 
-  // displayedColumns: string[] = [
-  //   'question',
-  //   'questionType',
-  //   'displayOrder',
-  //   'active',
-  //   'actions',
-  // ];
+  displayedColumns: string[] = [
+    'question',
+    'questionType',
+    'active',
+    'actions',
+  ];
 
   @ViewChild(MatSort)
   sort: MatSort = new MatSort();
@@ -69,7 +76,7 @@ export class TestDetailsComponent {
   }
 
   doFilter(value: string) {
-    // this.dsQuestions.filter = value.trim().toLocaleLowerCase();
+    this.dsQuestions.filter = value.trim().toLocaleLowerCase();
   }
 
   getTestCategories() {
@@ -91,20 +98,64 @@ export class TestDetailsComponent {
     );
   }
 
+  editQuestion(questionIndex: number) {
+    let question;
+
+    if (questionIndex === -1)
+      question = {
+        id: -1,
+        testID: this.testId,
+        options: 'a,b,c',
+      };
+    else question = this.testQuestions[questionIndex];
+
+    console.log({ questionIndex }, { question });
+
+    const dialogRef = this.dialog.open(QuestionDetailsComponent, {
+      data: question,
+      width: '750px',
+    });
+  
+
+  dialogRef.afterClosed().
+  subscribe((result: any) => {
+    if (result) {
+      if (questionIndex === -1) {
+           this.testQuestions.push({
+          id: 0,
+          testID: this.testId,
+          ...result,
+        });
+      } else {
+        const crntQuestion = this.testQuestions[questionIndex];
+
+        this.testQuestions[questionIndex] = {
+          ...crntQuestion,
+          ...result,
+        };
+      }
+      this.dsQuestions = new MatTableDataSource<Question>(this.testQuestions);
+
+      this.testDetailsForm.markAsDirty();
+    }
+  })
+  }
+
   getTest(testId: number) {
     this.testService.getTest(testId).then((test) => {
-    
+
       this.testDetailsForm.setValue({
         description: test.description,
         categoryID: test.categoryID,
         active: test.active,
       });
     });
-    // this.testService.getMatchedTestQuestions(testId).then((testQuestions) => {
-      // this.dsQuestions = new MatTableDataSource<Question>(testQuestions);
-      // this.dsQuestions.sort = this.sort;
-      // this.testQuestions = testQuestions;
-    // })
+    this.testService.getMatchedTestQuestions(testId).then((testQuestions) => {
+      testQuestions.filter((Object: { isDeleted: boolean }) => Object.isDeleted === false);
+      this.dsQuestions = new MatTableDataSource<Question>(testQuestions);
+      this.dsQuestions.sort = this.sort;
+      this.testQuestions = testQuestions;
+    })
   }
   saveTest() {
     this.testService
@@ -116,7 +167,7 @@ export class TestDetailsComponent {
           active: Boolean(this.testDetailsForm.get('active')?.value),
           createdDate: this.testDate,
           isDeleted: false,
-          // questions: this.testQuestions.slice(),
+          questions: this.testQuestions.slice(),
         },
       )
       .then(() =>
