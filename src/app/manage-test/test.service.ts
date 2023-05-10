@@ -59,7 +59,7 @@ export class TestService {
   async saveTest(test: any): Promise<any> {
     this.questions = test.questions;
     delete test.questions;
-    let testDataSave: Test | undefined = undefined; // initialize with default value
+    let testDataSave: Test | undefined = test; // initialize with default value
     console.table(this.questions)
     if (test.id === 0) {
       delete test.id; // Remove the id field to allow JSON server to auto-increment it
@@ -75,6 +75,7 @@ export class TestService {
       for (const question of this.questions) {
         if (question.id === 0) {
           delete question.id; // Remove the id field to allow JSON server to auto-increment it
+          console.table (testDataSave);
           if (testDataSave !== undefined) { // check if testDataSave is defined
             question.testID = testDataSave.id; // no need for non-null assertion
             await this.http.post(this.jsonServerURLQuestion, question, this.options).toPromise().catch((ex) => console.log(ex));

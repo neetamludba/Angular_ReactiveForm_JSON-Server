@@ -155,7 +155,7 @@ export class QuestionDetailsComponent implements OnInit {
     this.dialogRef.close(
       {
         question: this.questionDetailsForm.get('question')?.value,
-        questionType: this.questionDetailsForm.get('questionType')?.value,
+        questionType: Number(this.questionDetailsForm.get('questionType')?.value),
         isDeleted: false,
         mandatory: this.questionDetailsForm.get('mandatory')?.value,
         options: optionsData,

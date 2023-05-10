@@ -38,8 +38,11 @@ export class TestDetailsComponent {
   testDate = formatDate(this.currentDate, 'dd-MM-yyyy hh:mm a', 'en-US'); // A property that holds the formatted current date using the formatDate function
 
   testCategories: TestCategory[] = [];
-  testQuestions: any=[];
+  testQuestions: any = [];
+  filteredTestQuestions: any = [];
+  deletedTestQuestions: any = [];
   dsQuestions = new MatTableDataSource<Question>([]);
+  dsDeletedQuestions = new MatTableDataSource<Question>([]);
 
   displayedColumns: string[] = [
     'question',
@@ -59,6 +62,7 @@ export class TestDetailsComponent {
     if (!isNaN(id) && id > 0) {
       this.testId = id;
       this.getTest(this.testId);
+      this.getMatchedTestQuestions(this.testId);
     }
   }
 
@@ -107,38 +111,38 @@ export class TestDetailsComponent {
         testID: this.testId,
         options: 'a,b,c',
       };
-    else question = this.testQuestions[questionIndex];
+    else question = this.filteredTestQuestions[questionIndex];
 
-    console.log({ questionIndex }, { question });
+    // console.log({ questionIndex }, { question });
 
     const dialogRef = this.dialog.open(QuestionDetailsComponent, {
       data: question,
       width: '750px',
     });
-  
 
-  dialogRef.afterClosed().
-  subscribe((result: any) => {
-    if (result) {
-      if (questionIndex === -1) {
-           this.testQuestions.push({
-          id: 0,
-          testID: this.testId,
-          ...result,
-        });
-      } else {
-        const crntQuestion = this.testQuestions[questionIndex];
 
-        this.testQuestions[questionIndex] = {
-          ...crntQuestion,
-          ...result,
-        };
-      }
-      this.dsQuestions = new MatTableDataSource<Question>(this.testQuestions);
+    dialogRef.afterClosed().
+      subscribe((result: any) => {
+        if (result) {
+          if (questionIndex === -1) {
+            this.filteredTestQuestions.push({
+              id: 0,
+              testID: this.testId,
+              ...result,
+            });
+          } else {
+            const crntQuestion = this.filteredTestQuestions[questionIndex];
 
-      this.testDetailsForm.markAsDirty();
-    }
-  })
+            this.filteredTestQuestions[questionIndex] = {
+              ...crntQuestion,
+              ...result,
+            };
+          }
+          this.dsQuestions = new MatTableDataSource<Question>(this.filteredTestQuestions);
+
+          this.testDetailsForm.markAsDirty();
+        }
+      })
   }
 
   getTest(testId: number) {
@@ -150,14 +154,24 @@ export class TestDetailsComponent {
         active: test.active,
       });
     });
+
+  }
+
+  getMatchedTestQuestions(testId: number) {
     this.testService.getMatchedTestQuestions(testId).then((testQuestions) => {
-      testQuestions.filter((Object: { isDeleted: boolean }) => Object.isDeleted === false);
-      this.dsQuestions = new MatTableDataSource<Question>(testQuestions);
-      this.dsQuestions.sort = this.sort;
       this.testQuestions = testQuestions;
+
+      this.filteredTestQuestions = this.testQuestions.filter((Object: { isDeleted: boolean }) => Object.isDeleted === false);
+      this.dsQuestions = new MatTableDataSource<Question>(this.filteredTestQuestions);
+      this.dsQuestions.sort = this.sort;
+
+      this.deletedTestQuestions = this.testQuestions.filter((Object: { isDeleted: boolean }) => Object.isDeleted === true);
+      this.dsDeletedQuestions = new MatTableDataSource<Question>(this.deletedTestQuestions);
+      this.dsDeletedQuestions.sort = this.sort;
     })
   }
   saveTest() {
+    this.testQuestions = this.filteredTestQuestions.concat(this.deletedTestQuestions);
     this.testService
       .saveTest(
         {
@@ -178,13 +192,49 @@ export class TestDetailsComponent {
       .catch((ex) => console.log(ex));
   }
 
+  deleteQuestion(questionIndex: number) {
+    const crntQuestion = this.filteredTestQuestions[questionIndex];
+    this.filteredTestQuestions[questionIndex] = {
+      ...crntQuestion,
+      isDeleted: true,
+    };
+    // add the question to the deletedTestQuestions array
+    this.deletedTestQuestions.push(this.filteredTestQuestions[questionIndex]);
+    // remove the question from the filteredTestQuestions array
+    this.filteredTestQuestions.splice(questionIndex, 1);
+    this.dsQuestions = new MatTableDataSource<Question>(this.filteredTestQuestions);
+    this.dsQuestions.sort = this.sort;
+
+    this.dsDeletedQuestions = new MatTableDataSource<Question>(this.deletedTestQuestions);
+    this.dsDeletedQuestions.sort = this.sort;
+
+    this.testDetailsForm.markAsDirty();
+  }
+
+  addQuestion(questionIndex: number) {
+    const crntQuestion = this.deletedTestQuestions[questionIndex];
+    this.deletedTestQuestions[questionIndex] = {
+      ...crntQuestion,
+      isDeleted: false,
+    };
+    // add the question to the filteredTestQuestions array
+    this.filteredTestQuestions.push(this.deletedTestQuestions[questionIndex]);
+    // remove the question from the deletedTestQuestions array
+    this.deletedTestQuestions.splice(questionIndex, 1);
+    this.dsQuestions = new MatTableDataSource<Question>(this.filteredTestQuestions);
+    this.dsQuestions.sort = this.sort;
+
+    this.dsDeletedQuestions = new MatTableDataSource<Question>(this.deletedTestQuestions);
+    this.dsDeletedQuestions.sort = this.sort;
+
+    this.testDetailsForm.markAsDirty();
+  }
+
+
   closeForm() {
     this.router.navigateByUrl('test').catch((error) => {
       console.log(error);
     });
-  }
-  resetForm() {
-    this.testDetailsForm.reset();
   }
 
 }
