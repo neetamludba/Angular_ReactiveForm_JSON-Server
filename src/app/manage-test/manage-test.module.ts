@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { TestListComponent } from './test-list/test-list.component';
+import { TestDetailsComponent } from './test-details/test-details.component';
+import { TestListDeletedComponent } from './test-list-deleted/test-list-deleted.component';
 
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -15,8 +18,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
-import { TestDetailsComponent } from './test-details/test-details.component';
-import { TestListDeletedComponent } from './test-list-deleted/test-list-deleted.component';
 
 
 @NgModule({

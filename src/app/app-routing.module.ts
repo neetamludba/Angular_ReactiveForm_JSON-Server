@@ -9,6 +9,10 @@ import { CategoryListDeletedComponent } from './manage-test-category/category-li
 import { TestListComponent } from './manage-test/test-list/test-list.component';
 import { TestDetailsComponent } from './manage-test/test-details/test-details.component';
 import { TestListDeletedComponent } from './manage-test/test-list-deleted/test-list-deleted.component';
+import { BatchDetailsComponent } from './manage-batch/batch-details/batch-details.component';
+import { BatchListComponent } from './manage-batch/batch-list/batch-list.component';
+import { BatchListDeletedComponent } from './manage-batch/batch-list-deleted/batch-list-deleted.component';
+
 
 // Creating an array of routes for the application
 const routes: Routes = [
@@ -62,7 +66,32 @@ const routes: Routes = [
     path: 'test/:id',
     component: TestDetailsComponent,
     pathMatch: 'full'
+  },
+  {
+    path: 'batch',
+    component: BatchListComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'batch/create',
+    component: BatchDetailsComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'batch/deleted',
+    component: BatchListDeletedComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'batch/:id',
+    component: BatchDetailsComponent,
+    pathMatch: 'full'
   }
+  
+
+
+
+
  
 ];
 

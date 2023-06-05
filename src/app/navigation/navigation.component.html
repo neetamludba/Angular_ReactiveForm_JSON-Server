@@ -1,30 +1,20 @@
 <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav #drawer class="sidenav">
-      <mat-toolbar>Menu</mat-toolbar>
-      <mat-nav-list>
-        <a mat-list-item href="#">Test Categories</a>
-        <a mat-list-item href="#">Tests</a>
-      </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <mat-toolbar color="primary">
-        <span>Portia Lab</span>
-      </mat-toolbar>
-  
-      <mat-nav-list>
-        <a
-          mat-list-item
-          routerLink="/testCategory"
-          routerLinkActive="active-list-item"
-          >Test Category</a
-        >
-        <a
-          mat-list-item
-          routerLink="/test"
-          routerLinkActive="active-list-item"
-          >Tests</a
-        >
-      </mat-nav-list>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-  
+  <mat-sidenav #drawer class="sidenav">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item href="#">Test Categories</a>
+      <a mat-list-item href="#">Tests</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <span>Portia Lab</span>
+    </mat-toolbar>
+
+    <mat-nav-list>
+      <a mat-list-item routerLink="/batch" routerLinkActive="active-list-item">Batch</a>
+      <a mat-list-item routerLink="/testCategory" routerLinkActive="active-list-item">Test Category</a>
+      <a mat-list-item routerLink="/test" routerLinkActive="active-list-item">Tests</a>
+    </mat-nav-list>
+  </mat-sidenav-content>
+</mat-sidenav-container>

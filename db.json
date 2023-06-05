@@ -1,4 +1,14 @@
 {
+  "batch": [
+    {
+      "id": 1,
+      "batchName": "PL-00-2022",
+      "startDate": "2022-09-12",
+      "active": true,
+      "createdDate": "2022-09-12",
+      "isDeleted": false
+    }
+  ],
   "test-category": [
     {
       "id": 1,

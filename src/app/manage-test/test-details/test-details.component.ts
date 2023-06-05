@@ -35,7 +35,7 @@ export class TestDetailsComponent {
 
   testId: number = 0;
   currentDate = new Date; // A property that holds the current date
-  testDate = formatDate(this.currentDate, 'dd-MM-yyyy hh:mm a', 'en-US'); // A property that holds the formatted current date using the formatDate function
+  testDate = formatDate(this.currentDate, 'yyyy-MM-dd hh:mm a', 'en-US'); // A property that holds the formatted current date using the formatDate function
 
   testCategories: TestCategory[] = [];
   testQuestions: any = [];
@@ -81,6 +81,10 @@ export class TestDetailsComponent {
 
   doFilter(value: string) {
     this.dsQuestions.filter = value.trim().toLocaleLowerCase();
+  }
+
+  doFilterDeleted (value: string) {
+    this.dsDeletedQuestions.filter = value.trim().toLocaleLowerCase();
   }
 
   getTestCategories() {
