@@ -40,6 +40,7 @@ export class BatchListComponent {
   getAllBatches() {
     this.batchService.getAllBatches()
       .then((batches) => {
+        console.log(batches);
         let filteredCategories = batches.filter((object: { isDeleted: boolean }) => {
           return object.isDeleted == false
         });

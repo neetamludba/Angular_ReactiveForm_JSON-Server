@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BatchListComponent } from './batch-list/batch-list.component';
+import { BatchListDeletedComponent } from './batch-list-deleted/batch-list-deleted.component';
 import { BatchDetailsComponent } from './batch-details/batch-details.component';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -13,7 +14,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { BatchListDeletedComponent } from './batch-list-deleted/batch-list-deleted.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -32,7 +34,10 @@ import { BatchListDeletedComponent } from './batch-list-deleted/batch-list-delet
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    MatTableModule
-  ]
+    MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
+
 })
-export class ManageBatchModule { }
+export class ManageBatchModule {}
