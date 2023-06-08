@@ -9,6 +9,53 @@
       "isDeleted": false
     }
   ],
+  "user": [
+    {
+        "userID": 1,
+        "firstName": "Super",
+        "lastName": "Admin",
+        "email": "programmingbootcampcs@gmail.com",
+        "role": "Admin",
+        "password": "PortiaLab",
+        "batchId": 1,
+        "registrationDate": "2022-09-12 01:12:37",
+        "active": 1
+    },
+    {
+        "userID": 2,
+        "firstName": "Abdul",
+        "lastName": "Mateen",
+        "email": "Abdulmateen7733@gmail.com",
+        "role": "Teacher",
+        "password": "I am a teacher",
+        "batchId": 1,
+        "registrationDate": "2022-10-05 18:31:34",
+        "active": 1
+    },
+    {
+        "userID": 3,
+        "firstName": "Hamza",
+        "lastName": "Sohail",
+        "email": "hamzasohail395@gmail.com",
+        "role": "Student",
+        "password": "I am a student",
+        "batchId": 1,
+        "registrationDate": "2022-10-05 11:55:17",
+        "active": 1
+    },
+    {
+        "userID": 4,
+        "firstName": "Abdullah",
+        "lastName": "Mustafa",
+        "email": "abdullah202.Ab@gmail.com",
+        "role": "Student",
+        "password": "I am a student",
+        "batchId": 1,
+        "registrationDate": "2022-10-05 11:56:23",
+        "active": 1
+    }
+],
+
   "test-category": [
     {
       "id": 1,

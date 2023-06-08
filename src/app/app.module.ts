@@ -8,6 +8,7 @@ import { ManageTestCategoryModule } from './manage-test-category/manage-test-cat
 import { ManageTestModule } from './manage-test/manage-test.module';
 import { ManageQuestionModule } from './manage-question/manage-question.module';
 import { ManageBatchModule } from './manage-batch/manage-batch.module';
+import { ManageUserModule } from './manage-user/manage-user.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -32,6 +33,7 @@ import { MatListModule } from '@angular/material/list';
     ManageTestModule,
     ManageQuestionModule,
     ManageBatchModule,
+    ManageUserModule,
     
     BrowserAnimationsModule,
     MatSidenavModule,

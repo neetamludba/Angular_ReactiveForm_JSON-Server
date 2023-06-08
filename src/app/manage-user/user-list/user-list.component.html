@@ -1,0 +1,99 @@
+<div class="main-content">
+    <div class="mat-elevation-z8">
+        <div class="main-heading">
+            <h1>User List</h1>
+        </div>
+
+        <div class="buttonAndFilter">
+
+            <div class="filterBar main-padding-left">
+                <mat-form-field>
+                    <input matInput type="text" placeholder="Filter" (keyup)="doFilter($any($event).target.value)">
+                </mat-form-field>
+            </div>
+
+
+            <div class="main-padding-right">
+                <button mat-mini-fab color="primary" (click)="createUser()">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+
+        </div>
+
+        <table class="listtable" mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+                <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="firstName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th>
+                <td mat-cell *matCellDef="let element">{{ element.firstName }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="lastName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</th>
+                <td mat-cell *matCellDef="let element">{{ element.lastName }}</td>
+            </ng-container>
+            <ng-container matColumnDef="password">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Password</th>
+                <td mat-cell *matCellDef="let element">{{ element.password }}</td>
+            </ng-container>
+            <ng-container matColumnDef="role">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
+                <td mat-cell *matCellDef="let element">{{ element.role }}</td>
+            </ng-container>
+            <ng-container matColumnDef="batch">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Batch</th>
+                <td mat-cell *matCellDef="let element">
+                    <div *ngFor="let b of batches">
+                        <div *ngIf="b.id == element.batchId && b.isDeleted == false">
+                            {{b.batchName}}
+                        </div>
+
+                        <div *ngIf="b.id == element.batchId && b.isDeleted == true">
+                            <span class="deleted">Deleted</span> "{{b.batchName}}"
+                        </div>
+                    </div>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="registrationDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Registered On</th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.registrationDate | date }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="active">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Active</th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-checkbox disabled [checked]="element.active"> </mat-checkbox>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Actions</th>
+                <td mat-cell *matCellDef="let element">
+                    <a class="iconbutton" [routerLink]="['/user', element.userID]" mat-icon-button>
+                        <mat-icon color="primary">edit</mat-icon>
+                    </a>
+                    <button class="iconbutton" mat-icon-button>
+                        <mat-icon color="warn">delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <!-- <mat-paginator
+        showFirstLastButtons
+        aria-label="Select page of test category"
+      >
+      </mat-paginator> -->
+    </div>
+</div>
+
+<!-- [pageSizeOptions]="[5, 10, 20]" -->

@@ -1,0 +1,70 @@
+<div class="main-content">
+    <div class="mat-elevation-z8">
+        <mat-card>
+            <mat-card-content>
+                <form class="dataform" [formGroup]="userDetailsForm">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Email</mat-label>
+                        <input matInput required formControlName="email" />
+                        <mat-error *ngIf="userDetailsForm.get('email')?.errors">
+                            {{ showErrorMessage("email") }}
+                        </mat-error>
+                    </mat-form-field>
+                    <br /><br />
+                    <mat-form-field appearance="fill">
+                        <mat-label>First name</mat-label>
+                        <input matInput required formControlName="firstName" />
+                        <mat-error *ngIf="userDetailsForm.get('firstName')?.errors">
+                            {{ showErrorMessage("firstName") }}
+                        </mat-error>
+                    </mat-form-field>
+                    <br /><br />
+                    <mat-form-field appearance="fill">
+                        <mat-label>Last name</mat-label>
+                        <input matInput required formControlName="lastName" />
+                        <mat-error *ngIf="userDetailsForm.get('lastName')?.errors">
+                            {{ showErrorMessage("lastName") }}
+                        </mat-error>
+                    </mat-form-field>
+                    <br /><br />
+                    <mat-form-field appearance="fill">
+                        <mat-label>Password</mat-label>
+                        <input matInput required formControlName="password" />
+                        <mat-error *ngIf="userDetailsForm.get('password')?.errors">
+                            {{ showErrorMessage("password") }}
+                        </mat-error>
+                    </mat-form-field>
+                    <br /><br />
+                    <mat-form-field appearance="fill">
+                        <mat-label>Batch</mat-label>
+                        <mat-select (change)="changeBatch($event)" formControlName="batchId">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let b of batches " [value]="b.id">
+                                {{ b.batchName }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <br /><br />
+                    <mat-form-field appearance="fill">
+                        <mat-label>Role</mat-label>
+                        <mat-select formControlName="role">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let r of roles" [value]="r">
+                                {{ r }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <br /><br />
+                    <mat-checkbox formControlName="active">Active</mat-checkbox>
+                </form>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-flat-button (click)="closeForm()">Cancel</button>
+                <button mat-flat-button color="primary" (click)="saveUser()"
+                    [disabled]="!userDetailsForm.valid || !userDetailsForm.dirty">
+                    Save
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

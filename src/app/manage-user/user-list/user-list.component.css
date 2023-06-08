@@ -1,0 +1,17 @@
+.addTestButton{
+    margin: 20px;
+    margin-top: 30px;
+}
+.main-heading{
+    text-align: center;
+    padding: 20px;
+}
+.main-padding-left{
+    padding-left: 20px;
+}
+.main-padding-right{
+    padding-right: 20px;
+}
+.deleted{
+    color: red;
+}
