@@ -6,11 +6,13 @@ import { User } from 'src/app/models/user.model';
 import { UserService } from '../user.service';
 
 @Component({
-  selector: 'app-user-list',
-  templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css']
+  selector: 'app-user-list-deleted',
+  templateUrl: './user-list-deleted.component.html',
+  styleUrls: ['./user-list-deleted.component.css']
 })
-export class UserListComponent implements AfterViewInit {
+export class UserListDeletedComponent {
+
+  
   batches: any;
   constructor(private userService: UserService, private router: Router) { }
 
@@ -33,7 +35,7 @@ export class UserListComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.getAllbatches();
     this.userService.getAllUsers().then((users) => {
-      users.filter((user: { isDeleted: boolean; }) => user.isDeleted === false);
+      users.filter((user: { isDeleted: boolean; }) => user.isDeleted === true);
       this.dataSource = new MatTableDataSource<User>(users);
       this.dataSource.sort = this.sort;
       console.table(users);
@@ -52,25 +54,22 @@ export class UserListComponent implements AfterViewInit {
       })
       .catch((err) => console.log(err));
   }
-  deleteUser(id: number) {
-    this.userService.deleteUser(id).then((res) => {
+  
+  unDeleteUser(id: number) {
+    this.userService.unDeleteUser(id).then((res) => {
       this.userService.getAllUsers().then((users) => {
-        users.filter((user: { isDeleted: boolean; }) => user.isDeleted === false);
+        users.filter((user: { isDeleted: boolean; }) => user.isDeleted === true);
         this.dataSource = new MatTableDataSource<User>(users);
         this.dataSource.sort = this.sort;
       });
     });
   }
-
-  createUser() {
-    this.router.navigateByUrl('user/create').catch((error) => {
+  
+  gotoUser() {
+    this.router.navigateByUrl('/user').catch((error) => {
       console.log(error);
     });
   }
 
-  gotoDeletedUsers(){
-    this.router.navigateByUrl('user/deleted').catch((error) => {
-      console.log(error);
-    });
-  }
+
 }

@@ -14,12 +14,15 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { UserListDeletedComponent } from './user-list-deleted/user-list-deleted.component';
 
 
 @NgModule({
   declarations: [
     UserDetailsComponent,
-    UserListComponent
+    UserListComponent,
+    UserListDeletedComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +37,8 @@ import { MatOptionModule } from '@angular/material/core';
     MatButtonModule,
     ReactiveFormsModule,
     RouterModule,
-    MatOptionModule
+    MatOptionModule,
+    MatSelectModule
   ]
 })
 export class ManageUserModule { }

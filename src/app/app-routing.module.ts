@@ -14,6 +14,7 @@ import { BatchListComponent } from './manage-batch/batch-list/batch-list.compone
 import { BatchListDeletedComponent } from './manage-batch/batch-list-deleted/batch-list-deleted.component';
 import { UserDetailsComponent } from './manage-user/user-details/user-details.component';
 import { UserListComponent } from './manage-user/user-list/user-list.component';
+import { UserListDeletedComponent } from './manage-user/user-list-deleted/user-list-deleted.component';
 
 // Creating an array of routes for the application
 const routes: Routes = [
@@ -98,11 +99,11 @@ const routes: Routes = [
     component: UserDetailsComponent,
     pathMatch: 'full'
   },
-  // {
-  //   path: 'user/deleted',
-  //   component: UserListComponent,
-  //   pathMatch: 'full'
-  // },
+  {
+    path: 'user/deleted',
+    component: UserListDeletedComponent,
+    pathMatch: 'full'
+  },
   {
     path: 'user/:id',
     component: UserDetailsComponent,

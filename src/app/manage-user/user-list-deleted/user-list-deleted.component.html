@@ -1,7 +1,7 @@
 <div class="main-content">
     <div class="mat-elevation-z8">
         <div class="main-heading">
-            <h1>User List</h1>
+            <h1>Deleted User List</h1>
         </div>
 
         <div class="buttonAndFilter">
@@ -14,8 +14,8 @@
 
 
             <div class="main-padding-right">
-                <button mat-mini-fab color="primary" (click)="createUser()">
-                    <mat-icon>add</mat-icon>
+                <button mat-mini-fab color="primary" (click)="gotoUser()">
+                    <mat-icon>arrow_back</mat-icon>
                 </button>
             </div>
 
@@ -75,11 +75,8 @@
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Actions</th>
                 <td mat-cell *matCellDef="let element">
-                    <a class="iconbutton" [routerLink]="['/user', element.userID]" mat-icon-button>
-                        <mat-icon color="primary">edit</mat-icon>
-                    </a>
-                    <button class="iconbutton" (click)="deleteUser(element.id)" mat-icon-button>
-                        <mat-icon color="warn">delete</mat-icon>
+                    <button class="iconbutton" (click)="unDeleteUser(element.id)" mat-icon-button>
+                        <mat-icon color="primary">add</mat-icon>
                     </button>
                 </td>
             </ng-container>
@@ -93,11 +90,6 @@
         aria-label="Select page of test category"
       >
       </mat-paginator> -->
-    </div>
-    <div>
-        <button class='addUserButton' mat-flat-button color="warn" (click)="gotoDeletedUsers()">
-            Deleted Users
-        </button>
     </div>
 </div>
 

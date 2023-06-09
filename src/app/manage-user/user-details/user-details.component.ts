@@ -9,14 +9,14 @@ import { formatDate } from '@angular/common';
   templateUrl: './user-details.component.html',
   styleUrls: ['./user-details.component.css']
 })
-export class UserDetailsComponent implements OnInit{
+export class UserDetailsComponent implements OnInit {
   batches: any;
-  roles: any = ['Admin','Teacher','Student'];
+  roles: any = ['Admin', 'Teacher', 'Student'];
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   userDetailsForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -33,7 +33,7 @@ export class UserDetailsComponent implements OnInit{
       Validators.required,
       Validators.minLength(5),
     ]),
-    batchId: new FormControl(''),
+    batchId: new FormControl('', [Validators.required]),
     active: new FormControl(true),
   });
 
@@ -84,6 +84,7 @@ export class UserDetailsComponent implements OnInit{
       .getAllBatches()
       .then((batches) => {
         this.batches = batches;
+        console.log(this.batches);
       })
       .catch((err) => console.log(err));
   }
