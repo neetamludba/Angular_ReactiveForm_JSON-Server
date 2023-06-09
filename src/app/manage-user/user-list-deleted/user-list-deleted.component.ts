@@ -12,7 +12,7 @@ import { UserService } from '../user.service';
 })
 export class UserListDeletedComponent {
 
-  
+
   batches: any;
   constructor(private userService: UserService, private router: Router) { }
 
@@ -34,11 +34,14 @@ export class UserListDeletedComponent {
 
   ngAfterViewInit() {
     this.getAllbatches();
+    this.getAllDeletedUsers();
+  }
+  getAllDeletedUsers() {
     this.userService.getAllUsers().then((users) => {
-      users.filter((user: { isDeleted: boolean; }) => user.isDeleted === true);
-      this.dataSource = new MatTableDataSource<User>(users);
+      let filteredUseres = users.filter((user: { isDeleted: boolean; }) => user.isDeleted === true);
+      this.dataSource = new MatTableDataSource<User>(filteredUseres);
       this.dataSource.sort = this.sort;
-      console.table(users);
+      console.table(filteredUseres);
     });
   }
 
@@ -54,17 +57,16 @@ export class UserListDeletedComponent {
       })
       .catch((err) => console.log(err));
   }
-  
+
   unDeleteUser(id: number) {
-    this.userService.unDeleteUser(id).then((res) => {
-      this.userService.getAllUsers().then((users) => {
-        users.filter((user: { isDeleted: boolean; }) => user.isDeleted === true);
-        this.dataSource = new MatTableDataSource<User>(users);
-        this.dataSource.sort = this.sort;
-      });
-    });
+    this.userService.unDeleteUser(id).catch((error) => {
+      console.log(error);
+    }
+    );
+    
+    this.getAllDeletedUsers();
   }
-  
+
   gotoUser() {
     this.router.navigateByUrl('/user').catch((error) => {
       console.log(error);

@@ -118,6 +118,7 @@ export class UserDetailsComponent implements OnInit {
           role: this.userDetailsForm.get('role')?.value,
           registrationDate: this.registrationDate,
           active: Boolean(this.userDetailsForm.get('active')?.value),
+          isDeleted: false,
         }
       )
       .then((userCreated) => {

@@ -19,7 +19,8 @@
       "password": "PortiaLab",
       "batchId": 1,
       "registrationDate": "2022-09-12 01:12:37",
-      "active": true
+      "active": true,
+      "isDeleted": false
     },
     {
       "id": 2,
@@ -30,7 +31,8 @@
       "password": "I am a teacher",
       "batchId": 1,
       "registrationDate": "2022-10-05 18:31:34",
-      "active": true
+      "active": true,
+      "isDeleted": false
     },
     {
       "id": 3,
@@ -41,7 +43,8 @@
       "password": "I am a student",
       "batchId": 1,
       "registrationDate": "2022-10-05 11:55:17",
-      "active": true
+      "active": true,
+      "isDeleted": false
     },
     {
       "id": 4,
@@ -52,7 +55,8 @@
       "password": "I am a student",
       "batchId": 1,
       "registrationDate": "2022-10-05 11:56:23",
-      "active": true
+      "active": true,
+      "isDeleted": false
     }
   ],
   "test-category": [

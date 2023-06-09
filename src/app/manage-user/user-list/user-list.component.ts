@@ -32,11 +32,15 @@ export class UserListComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.getAllbatches();
+    this.getAllUsers();
+  }
+
+  getAllUsers() {
     this.userService.getAllUsers().then((users) => {
-      users.filter((user: { isDeleted: boolean; }) => user.isDeleted === false);
-      this.dataSource = new MatTableDataSource<User>(users);
+      let filteredUseres = users.filter((user: { isDeleted: boolean; }) => user.isDeleted === false);
+      this.dataSource = new MatTableDataSource<User>(filteredUseres);
       this.dataSource.sort = this.sort;
-      console.table(users);
+      console.table(filteredUseres);
     });
   }
 
@@ -53,13 +57,12 @@ export class UserListComponent implements AfterViewInit {
       .catch((err) => console.log(err));
   }
   deleteUser(id: number) {
-    this.userService.deleteUser(id).then((res) => {
-      this.userService.getAllUsers().then((users) => {
-        users.filter((user: { isDeleted: boolean; }) => user.isDeleted === false);
-        this.dataSource = new MatTableDataSource<User>(users);
-        this.dataSource.sort = this.sort;
-      });
-    });
+    this.userService.deleteUser(id).catch((error) => {
+      console.log(error);
+    }
+    );
+    this.getAllUsers();
+
   }
 
   createUser() {
@@ -68,7 +71,7 @@ export class UserListComponent implements AfterViewInit {
     });
   }
 
-  gotoDeletedUsers(){
+  gotoDeletedUsers() {
     this.router.navigateByUrl('user/deleted').catch((error) => {
       console.log(error);
     });
