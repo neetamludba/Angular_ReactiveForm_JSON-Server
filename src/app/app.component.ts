@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AccountService } from './account/account.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'practice-webapp-json';
+  title = 'MCQ Portal';
+  user: any;
+
+  constructor(private accountService: AccountService) {
+    this.accountService.user.subscribe(x => this.user = x);
+  }
 }

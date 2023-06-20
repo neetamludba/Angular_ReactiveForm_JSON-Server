@@ -1,0 +1,10 @@
+.login-flex-div{
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.center {
+    text-align: center;
+}

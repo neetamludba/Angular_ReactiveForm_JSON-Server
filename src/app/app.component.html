@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" *ngIf="user">
   <div class="sidebar">
     <app-navigation></app-navigation>
   </div>
@@ -7,4 +7,8 @@
       <router-outlet></router-outlet>
     </div>
   </div>
+</div>
+
+<div class="wrapper" *ngIf="user == null">
+<router-outlet></router-outlet>
 </div>

@@ -15,99 +15,126 @@ import { BatchListDeletedComponent } from './manage-batch/batch-list-deleted/bat
 import { UserDetailsComponent } from './manage-user/user-details/user-details.component';
 import { UserListComponent } from './manage-user/user-list/user-list.component';
 import { UserListDeletedComponent } from './manage-user/user-list-deleted/user-list-deleted.component';
+import { LoginComponent } from './account/login/login.component';
 
+import { AuthGuard } from './helpers/auth.guard';
 // Creating an array of routes for the application
 const routes: Routes = [
   {
     path: '',
     component: TestListComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'account/login',
+    component: LoginComponent,
   },
   {
     path: 'home',
     component: CategoryListComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
+
   },
   {
     path: 'testCategory',
     component: CategoryListComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
+
   },
   {
     path: 'testCategory/create',
     component: CategoryDetailsComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
+
   },
   {
     path: 'testCategory/deleted',
     component: CategoryListDeletedComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   {
     path: 'testCategory/:id',
     component: CategoryDetailsComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
 
   {
     path: 'test',
     component: TestListComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   {
     path: 'test/create',
     component: TestDetailsComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   {
     path: 'test/deleted',
     component: TestListDeletedComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   {
     path: 'test/:id',
     component: TestDetailsComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   {
     path: 'batch',
     component: BatchListComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   {
     path: 'batch/create',
     component: BatchDetailsComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   {
     path: 'batch/deleted',
     component: BatchListDeletedComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   {
     path: 'batch/:id',
     component: BatchDetailsComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   {
     path: 'user',
     component: UserListComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   {
     path: 'user/create',
     component: UserDetailsComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   {
     path: 'user/deleted',
     component: UserListDeletedComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   {
     path: 'user/:id',
     component: UserDetailsComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   }
 
 

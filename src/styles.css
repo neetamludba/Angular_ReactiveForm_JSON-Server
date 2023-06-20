@@ -1,32 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
-.main-content {
-    margin-top: 50px;
-    padding: 15px 30px;
-    min-height: calc(100vh - 123px);
-  }
+body {
+  margin: 0;
+  background-color: #eee;
+  color: #3c4858;
+}
 
-  .buttonAndFilter{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 16px;
-  }
-  .main-panel {
-    position: relative;
-    float: right;
-    width: calc(100% - 260px);
-    -webkit-transition: 0.33s, cubic-bezier(0.685, 0.0473, 0.346, 1);
-    transition: 0.33s, cubic-bezier(0.685, 0.0473, 0.346, 1);
-  }
-  
 .wrapper {
   position: relative;
   top: 0;
   height: 100vh;
 }
+
 
 .sidebar {
   position: fixed;
@@ -41,6 +31,49 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56),
     0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
+
+.main-panel {
+  position: relative;
+  float: right;
+  width: calc(100% - 260px);
+  -webkit-transition: 0.33s, cubic-bezier(0.685, 0.0473, 0.346, 1);
+  transition: 0.33s, cubic-bezier(0.685, 0.0473, 0.346, 1);
+}
+.navbar {
+  margin-bottom: 0;
+}
+
+.main-content {
+  margin-top: 50px;
+  padding: 15px 30px;
+  min-height: calc(100vh - 123px);
+}
+
+.footer {
+  border-top: 1px solid #e7e7e7;
+}
+
+.header {
+  margin-bottom: 30px;
+}
+
+.header .title {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+
+.buttonAndFilter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+}
+
+
+
+
+
 
 .actionBar {
   display: flex;
@@ -83,4 +116,53 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   padding-left: 10px;
   padding-right: 10px;
   text-align: center;
+}
+
+.content-toolbar {
+  position: absolute;
+  padding: 20px !important;
+  background-color: transparent !important;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.listtable {
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.filterBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+}
+
+
+
+
+
+.attemptnavbutton {
+  margin-left: 10px !important;
+}
+
+.mat-radio-disabled .mat-radio-label-content,
+.mat-checkbox-disabled .mat-checkbox-label {
+  display: flex;
+  align-items: center;
+}
+
+.correctAnswer .mat-radio-label-content,
+.correctAnswer .mat-checkbox-label {
+  color: green !important;
+}
+
+.wrongAnswer .mat-radio-label-content,
+.wrongAnswer .mat-checkbox-label {
+  color: red !important;
 }
