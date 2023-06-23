@@ -24,7 +24,8 @@ const routes: Routes = [
     path: '',
     component: TestListComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { title: 'Test List' }
   },
   {
     path: 'account/login',
@@ -34,107 +35,124 @@ const routes: Routes = [
     path: 'home',
     component: CategoryListComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { title: 'Test Category List' }
 
   },
   {
     path: 'testCategory',
     component: CategoryListComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { title: 'Test Category List' }
 
   },
   {
     path: 'testCategory/create',
     component: CategoryDetailsComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { title: 'Create Test Category' }
 
   },
   {
     path: 'testCategory/deleted',
     component: CategoryListDeletedComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { title: 'Deleted Test Category List' }
   },
   {
     path: 'testCategory/:id',
     component: CategoryDetailsComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { title: 'Edit Test Category' }
   },
 
   {
     path: 'test',
     component: TestListComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { title: 'Test List' }
   },
   {
     path: 'test/create',
     component: TestDetailsComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { title: 'Create Test' }
   },
   {
     path: 'test/deleted',
     component: TestListDeletedComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { title: 'Deleted Test List' }
   },
   {
     path: 'test/:id',
     component: TestDetailsComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { title: 'Edit Test' }
   },
   {
     path: 'batch',
     component: BatchListComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { title: 'Batch List' }
   },
   {
     path: 'batch/create',
     component: BatchDetailsComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { title: 'Create Batch' }
   },
   {
     path: 'batch/deleted',
     component: BatchListDeletedComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { title: 'Deleted Batch List' }
   },
   {
     path: 'batch/:id',
     component: BatchDetailsComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { title: 'Edit Batch' }
   },
   {
     path: 'user',
     component: UserListComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { title: 'User List' }
   },
   {
     path: 'user/create',
     component: UserDetailsComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { title: 'Create User' }
   },
   {
     path: 'user/deleted',
     component: UserListDeletedComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { title: 'Deleted User List' }
   },
   {
     path: 'user/:id',
     component: UserDetailsComponent,
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { title: 'Edit User' }
   }
 
 

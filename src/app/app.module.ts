@@ -17,6 +17,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 
@@ -24,7 +25,8 @@ import { MatListModule } from '@angular/material/list';
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent
+    NavigationComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

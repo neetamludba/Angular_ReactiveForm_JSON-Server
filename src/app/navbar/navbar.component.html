@@ -1,0 +1,8 @@
+<mat-toolbar class="content-toolbar">
+    <span>{{ getTitle() }}</span>
+    <span class="example-spacer"></span>
+    <span class="userName">{{ userName }}</span>
+    <button mat-icon-button style="cursor: pointer">
+        <mat-icon (click)="logout()">logout</mat-icon>
+    </button>
+</mat-toolbar>

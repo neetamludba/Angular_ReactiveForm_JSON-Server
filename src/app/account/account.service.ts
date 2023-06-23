@@ -52,4 +52,10 @@ export class AccountService {
       })
       .catch((ex) => console.log(ex));
   }
+
+  async logout(): Promise<any> {
+    localStorage.removeItem('user');
+    this.userSubject.next(null);
+    this.router.navigate(['account/login']);
+  }
 }
