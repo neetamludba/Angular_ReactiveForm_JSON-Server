@@ -24,7 +24,7 @@ export class AccountService {
     this.user = this.userSubject.asObservable();
   }
   public get userValue(): SessionUser {
-    return this.userSubject.value?.userObject;
+    return this.userSubject.value;
   }
 
   public get token(): string {
