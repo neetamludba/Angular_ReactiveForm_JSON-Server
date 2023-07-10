@@ -5,7 +5,7 @@ export interface User {
     lastName: string;
     password: string;
     role: string;
-    batchId: number;
+    batchId: string;
     registerationDate: Date;
     active: boolean;
     isDeleted: boolean;

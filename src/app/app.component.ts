@@ -7,7 +7,7 @@ import { AccountService } from './account/account.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'MCQ Portal';
+  title = 'practice-webapp-json';
   user: any;
 
   constructor(private accountService: AccountService) {

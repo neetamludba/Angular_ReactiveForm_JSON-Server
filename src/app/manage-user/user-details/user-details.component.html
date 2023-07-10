@@ -39,7 +39,7 @@
                         <mat-label>Batch</mat-label>
                         <mat-select (change)="changeBatch($event)" formControlName="batchId">
                             <mat-option>None</mat-option>
-                            <mat-option *ngFor="let b of batches " [value]="b.id">
+                            <mat-option *ngFor="let b of allBatches " [value]="b.id">
                                 {{ b.batchName }}
                             </mat-option>
                         </mat-select>

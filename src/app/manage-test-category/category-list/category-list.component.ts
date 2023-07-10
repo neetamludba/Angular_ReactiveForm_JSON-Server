@@ -26,10 +26,15 @@ import { TestCategoryService } from '../test-category.service';
 
 // This is the main body of the component class. Here, we define the component's properties and methods. 
 export class CategoryListComponent implements AfterViewInit {
+  refresh(): void {
+    this.getAllCategories();
+
+
+  }
 
   // The constructor method is called when the component is initialized and it injects the Router and TestCategoryService services into the component.
   constructor(
-    private router: Router,
+    public router: Router,
     private testCategoryService: TestCategoryService
   ) { }
 
@@ -43,7 +48,7 @@ export class CategoryListComponent implements AfterViewInit {
   dataSource = new MatTableDataSource<TestCategory>([]);
 
   // The ngAfterViewInit method is called after the view is initialized, and it calls the getCategories method to populate the table with data.
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.getAllCategories();
   }
 
@@ -73,32 +78,30 @@ export class CategoryListComponent implements AfterViewInit {
 
   // The createCategory method navigates to the testCategory/create
   createCategory() {
-    this.router.navigateByUrl('testCategory/create').catch((error) => {
-      console.log(error);
-    });
+    this.router.navigateByUrl('testCategory/create')
   }
 
   // The editCategory method navigates to the testCategory/:id
   editCategory(categoryId: number) {
-    this.router.navigateByUrl('testCategory/' + categoryId).catch((error) => {
-      console.log(error);
-    });
+    this.router.navigateByUrl('testCategory/' + categoryId)
 
   }
 
-  // This function takes in a categoryId number and deletes the corresponding category
+
+
+  // // This function takes in a categoryId number and deletes the corresponding category
   deleteCategory(categoryId: any) {
-    // Calls the deleteCategory method from the testCategoryService with an object containing the categoryId and a flag isDeleted set to true.
+    //   // Calls the deleteCategory method from the testCategoryService with an object containing the categoryId and a flag isDeleted set to true.
     this.testCategoryService.deleteCategory(categoryId)
-    .catch((ex)=> console.log(ex));
 
-      this.getAllCategories();
+
+    this.getAllCategories();
+
   }
 
-  gotoDeletedCategories(){
-    this.router.navigateByUrl('testCategory/deleted').catch((error) => {
-      console.log(error);
-    });
+  gotoDeletedCategories() {
+    this.router.navigateByUrl('testCategory/deleted')
+    
   }
 
 }

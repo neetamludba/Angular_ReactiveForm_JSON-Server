@@ -1,10 +1,16 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ReactiveFormsModule } from '@angular/forms';
 import { CategoryDetailsComponent } from './category-details.component';
 import { TestCategoryService } from '../test-category.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, convertToParamMap } from '@angular/router';
-import { of } from 'rxjs';
 
 describe('CategoryDetailsComponent', () => {
   let component: CategoryDetailsComponent;
@@ -13,72 +19,105 @@ describe('CategoryDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CategoryDetailsComponent ],
+      declarations: [CategoryDetailsComponent],
       imports: [
-        RouterTestingModule,
-        FormsModule,
+        RouterTestingModule, 
+        HttpClientTestingModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatCheckboxModule,
         ReactiveFormsModule,
+        BrowserAnimationsModule
+      
+
       ],
       providers: [
         TestCategoryService,
         {
           provide: ActivatedRoute,
           useValue: {
-            snapshot: { paramMap: convertToParamMap({ id: '1' }) }
+            snapshot: {
+              paramMap: {
+                get: (param: string) => '1' // Set the 'id' parameter value to '1'
+              }
+            }
           }
         }
       ]
-    })
-    .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CategoryDetailsComponent);
     component = fixture.componentInstance;
     testCategoryService = TestBed.inject(TestCategoryService);
+    spyOn(testCategoryService, 'getCategory').and.returnValue(
+      Promise.resolve({
+        categoryName: 'Test Category',
+        active: true
+      })
+    );
+
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
+  it('should initialize the component with category details', waitForAsync(async () => {
+    await fixture.whenStable();
 
-  it('should call getCategory method when initialized', () => {
-    spyOn(component, 'getCategory');
-    component.ngOnInit();
-    expect(component.getCategory).toHaveBeenCalled();
+    expect(component.categoryDetailsForm.get('categoryName')?.value).toBe(
+      'Test Category'
+    );
+  }));
+
+  it('should show an error message for the category name field', () => {
+    component.categoryDetailsForm.controls['categoryName'].setValue('');
+    expect(component.showErrorMessage('categoryName')).toBe('Category name is required');
+
+    component.categoryDetailsForm.controls['categoryName'].setValue('abc');
+    expect(component.showErrorMessage('categoryName')).toBe('Category name must be 5 characters long');
+
+    component.categoryDetailsForm.controls['categoryName'].setValue('valid category name');
+    expect(component.showErrorMessage('categoryName')).toBe('');
   });
 
-  it('should call saveCategory method of TestCategoryService when saveForm is called', async () => {
+  it('should save the form data and navigate to the testCategory page', async () => {
     spyOn(testCategoryService, 'saveCategory').and.returnValue(Promise.resolve());
+    spyOn(component.router, 'navigateByUrl');
+
+    component.categoryId = 1;
+    component.categoryDetailsForm.controls['categoryName'].setValue('Test Category');
+    component.categoryDetailsForm.controls['active'].setValue(true);
+    component.categoryDate = '2023-06-27 10:00 AM';
+
     await component.saveForm();
-    expect(testCategoryService.saveCategory).toHaveBeenCalled();
-  });
 
-  it('should call reset method of categoryDetailsForm when resetForm is called', () => {
-    spyOn(component.categoryDetailsForm, 'reset');
-    component.resetForm();
-    expect(component.categoryDetailsForm.reset).toHaveBeenCalled();
-  });
-
-  it('should navigate to testCategory page when cancelForm is called', () => {
-    spyOn(component.router, 'navigateByUrl').and.callThrough();
-    component.cancelForm();
+    expect(testCategoryService.saveCategory).toHaveBeenCalledWith({
+      id: 1,
+      categoryName: 'Test Category',
+      active: true,
+      createdDate: '2023-06-27 10:00 AM',
+      isDeleted: false
+    });
     expect(component.router.navigateByUrl).toHaveBeenCalledWith('testCategory');
   });
 
-  it('should show error message for required field', () => {
-    component.categoryDetailsForm.controls['categoryName'].setValue('');
-    expect(component.showErrorMessage('categoryName')).toBe('Category name is required');
-  });
+  it('should reset the form', () => {
+    spyOn(console, 'log');
 
-  it('should show error message for minimum length validation', () => {
-    component.categoryDetailsForm.controls['categoryName'].setValue('abc');
-    expect(component.showErrorMessage('categoryName')).toBe('Category name must be 5 characters long');
-  });
+    component.categoryDetailsForm.controls['categoryName'].setValue('Test Category');
+    component.categoryDetailsForm.controls['active'].setValue(true);
 
-  it('should not show any error message when field is valid', () => {
-    component.categoryDetailsForm.controls['categoryName'].setValue('valid input');
-    expect(component.showErrorMessage('categoryName')).toBe('');
+    component.resetForm();
+
+    expect(console.log).toHaveBeenCalledWith('Reset Button Works ');
+    expect(component.categoryDetailsForm.value).toEqual({
+      categoryName: '',
+      active: false
+    });
   });
 });
+

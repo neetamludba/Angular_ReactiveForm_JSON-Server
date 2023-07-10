@@ -39,7 +39,7 @@ export class CategoryListDeletedComponent implements AfterViewInit{
   }
 
   // The doFilter method is used to filter the data source when the user types in the filter input field.
-  doFilter(value: string) {
+  doFilter(value: string):void {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
 
@@ -69,13 +69,12 @@ export class CategoryListDeletedComponent implements AfterViewInit{
   unDeleteCategory(categoryId: any) {
     // Calls the deleteCategory method from the testCategoryService with an object containing the categoryId and a flag isDeleted set to true.
     this.testCategoryService.unDeleteCategory(categoryId)
-    .catch((ex)=> console.log(ex));
+    
     this.getAllDeletedCategories();
 
   }
   
   backToCategories(){
-    this.router.navigateByUrl('testCategory').catch((error) =>
-    console.log(error));
+    this.router.navigateByUrl('testCategory')
   }
 }

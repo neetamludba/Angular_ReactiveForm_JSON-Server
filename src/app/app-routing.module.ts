@@ -18,6 +18,7 @@ import { UserListDeletedComponent } from './manage-user/user-list-deleted/user-l
 import { LoginComponent } from './account/login/login.component';
 
 import { AuthGuard } from './helpers/auth.guard';
+import { ResetPasswordComponent } from './account/reset-password/reset-password.component';
 // Creating an array of routes for the application
 const routes: Routes = [
   {
@@ -30,6 +31,20 @@ const routes: Routes = [
   {
     path: 'account/login',
     component: LoginComponent,
+  },
+  {
+    path: 'account/reset-password',
+    component: ResetPasswordComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    data: { title: 'Reset Password' }
+  },
+  {
+    path: 'account/reset-password-failed',
+    component: ResetPasswordComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    data: { title: 'Reset Password Failed' }
   },
   {
     path: 'home',

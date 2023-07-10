@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../user.service';
@@ -9,8 +9,8 @@ import { formatDate } from '@angular/common';
   templateUrl: './user-details.component.html',
   styleUrls: ['./user-details.component.css']
 })
-export class UserDetailsComponent implements OnInit {
-  batches: any;
+export class UserDetailsComponent implements AfterViewInit {
+  allBatches: any;
   roles: any = ['Admin', 'Teacher', 'Student'];
   constructor(
     private userService: UserService,
@@ -41,10 +41,10 @@ export class UserDetailsComponent implements OnInit {
   currentDate = new Date; // A property that holds the current date
   registrationDate = formatDate(this.currentDate, 'yyyy-MM-dd hh:mm a', 'en-US'); // A property that holds the formatted current date using the formatDate function
 
-  ngOnInit(): void {
+  async ngAfterViewInit(): Promise<void> {
     let id = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.getBatches();
+    await this.getBatches();
     if (!isNaN(id) && id > 0) {
       this.userId = id;
       this.getUser(this.userId);
@@ -82,17 +82,16 @@ export class UserDetailsComponent implements OnInit {
   getBatches() {
     this.userService
       .getAllBatches()
-      .then((batches) => {
-        this.batches = batches;
-        console.log(this.batches);
-      })
+      .then((batches) => 
+        this.allBatches = batches
+      )
       .catch((err) => console.log(err));
   }
 
   changeBatch(e: any) {
     this.userDetailsForm.setValue(
       {
-        batchId: e.target.value,
+        batchId: e.target.value.toString(),
         email: null,
         password: null,
         role: null,
@@ -114,7 +113,7 @@ export class UserDetailsComponent implements OnInit {
           password: this.userDetailsForm.get('password')?.value,
           firstName: this.userDetailsForm.get('firstName')?.value,
           lastName: this.userDetailsForm.get('lastName')?.value,
-          batchId: Number(this.userDetailsForm.get('batchId')?.value),
+          batchId: this.userDetailsForm.get('batchId')?.value?.toString(),
           role: this.userDetailsForm.get('role')?.value,
           registrationDate: this.registrationDate,
           active: Boolean(this.userDetailsForm.get('active')?.value),
@@ -131,9 +130,7 @@ export class UserDetailsComponent implements OnInit {
   }
 
   closeForm() {
-    this.router.navigateByUrl('user').catch((error) => {
-      console.log(error);
-    });
+    this.router.navigateByUrl('user')
   }
 
 }

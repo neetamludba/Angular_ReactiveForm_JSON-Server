@@ -5,11 +5,13 @@ import { ReactiveFormsModule} from '@angular/forms';
 import { MatCardModule} from '@angular/material/card';
 import { MatInputModule} from '@angular/material/input';
 import { MatButtonModule} from '@angular/material/button';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,

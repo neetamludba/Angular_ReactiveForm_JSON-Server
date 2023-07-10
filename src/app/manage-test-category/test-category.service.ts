@@ -8,7 +8,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class TestCategoryService {
-// The constructor method injects the HttpClient service into this service using Dependency Injection.
+  
+  // The constructor method injects the HttpClient service into this service using Dependency Injection.
   constructor(
     private http: HttpClient
   ) { }
@@ -27,8 +28,8 @@ export class TestCategoryService {
   options = { headers: this.headers };
 
 
-// saveCategory, getCategory, getAllCategories, and deleteCategory are methods that interact with the JSON server to perform CRUD operations on test categories. 
-// Each of these methods returns a Promise that resolves with the data returned by the server or rejects with an error.
+  // saveCategory, getCategory, getAllCategories, and deleteCategory are methods that interact with the JSON server to perform CRUD operations on test categories. 
+  // Each of these methods returns a Promise that resolves with the data returned by the server or rejects with an error.
 
 
   // This function saves the category data
@@ -82,13 +83,14 @@ export class TestCategoryService {
     return this.http.patch(url, { isDeleted: true }, this.options)
       .toPromise()
       .catch((ex) => console.log(ex));
+      
   }
 
   async unDeleteCategory(categoryId: number): Promise<any> {
     const url = `${this.jsonServerURL}/${categoryId}`;
     return this.http.patch(url, { isDeleted: false }, this.options)
-    .toPromise()
-    .catch((ex) => console.log(ex));
+      .toPromise()
+      .catch((ex) => console.log(ex));
   }
 
 

@@ -18,6 +18,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { NavbarComponent } from './navbar/navbar.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 
@@ -37,13 +38,14 @@ import { NavbarComponent } from './navbar/navbar.component';
     ManageQuestionModule,
     ManageBatchModule,
     ManageUserModule,
+    MatListModule,
     AccountModule,
     
     BrowserAnimationsModule,
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
-    MatListModule
+    MatMenuModule,
 
     
   ],

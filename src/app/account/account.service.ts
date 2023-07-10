@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class AccountService {
   private userSubject: BehaviorSubject<any>;
   public user: Observable<SessionUser>;
+  userData: any;
 
 
   constructor(
@@ -51,6 +52,22 @@ export class AccountService {
         return user;
       })
       .catch((ex) => console.log(ex));
+  }
+
+async resetPassword(oldPassword: string, newPassword: string): Promise<any> {
+    this.userData  = this.http.get(this.jsonServerURL + '/' + this.userValue.id)
+
+    if (this.userData.password === oldPassword) {
+      this.userData.password = newPassword;
+      return this.http.put(this.jsonServerURL + '/' + this.userValue.id, this.userData, this.options)
+        .toPromise().then((user) => {
+          localStorage.setItem('user', JSON.stringify(user));
+          this.userSubject.next(user);
+          return user;
+        })
+        .catch((ex) => console.log(ex));
+    }
+    return false;
   }
 
   async logout(): Promise<any> {

@@ -1,7 +1,14 @@
 <mat-toolbar class="content-toolbar">
     <span>{{ getTitle() }}</span>
     <span class="example-spacer"></span>
-    <span class="userName">{{ userName }}</span>
+    
+    <!-- create drop down where place the reset password button -->
+    <button id="profile" mat-button [matMenuTriggerFor]="profile" class="user-profile">
+        <mat-icon class="user-icon">person</mat-icon>
+        <span class="user-name">{{ userName }}</span></button>
+    <mat-menu #profile="matMenu">
+        <button mat-menu-item (click)="resetPassword()">Reset Password</button>
+        </mat-menu>
     <button mat-icon-button style="cursor: pointer">
         <mat-icon (click)="logout()">logout</mat-icon>
     </button>

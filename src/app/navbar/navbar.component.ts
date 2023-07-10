@@ -10,7 +10,7 @@ import { AccountService } from '../account/account.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  private currentPageTitle: string = '';
+  public currentPageTitle: string = '';
   
   constructor(
     private router: Router,
@@ -33,11 +33,22 @@ export class NavbarComponent implements OnInit {
   }
   userName: string = '';
 
-  getUserName(){
-    const userString = localStorage.getItem('user')!;
-    const userObject = JSON.parse(userString);
-    this.userName = userObject[0].firstName + ' ' + userObject[0].lastName;
+  getUserName() {
+    const userString = localStorage.getItem('user');
+    if (userString) {
+      const userObject = JSON.parse(userString);
+      if (Array.isArray(userObject) && userObject.length > 0) {
+        this.userName = userObject[0].firstName + ' ' + userObject[0].lastName;
+      } else {
+        // Handle case where userObject is not an array or is empty
+        // Display an appropriate error or fallback value
+      }
+    } else {
+      // Handle case where userString is null or undefined
+      // Display an appropriate error or fallback value
+    }
   }
+  
 
   
 
@@ -51,6 +62,9 @@ export class NavbarComponent implements OnInit {
 
   getTitle() {
     return this.currentPageTitle;
+  }
+  resetPassword() {
+    this.router.navigateByUrl('/account/reset-password');
   }
 
   logout() {

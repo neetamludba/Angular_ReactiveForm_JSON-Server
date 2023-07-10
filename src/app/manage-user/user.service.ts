@@ -51,10 +51,13 @@ export class UserService {
   }
 
   async getAllBatches(): Promise<any> {
+    
     return this.http.get(this.jsonServerURLbatch)
-      .toPromise().then((batchData) => batchData)
-      .catch((ex) => console.log(ex));
+    .toPromise().then((batchData) => batchData)
+    
+    .catch((ex) => console.log(ex));
   }
+  
 
 
   // This function gets all the users

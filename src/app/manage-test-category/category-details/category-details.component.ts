@@ -92,8 +92,6 @@ export class CategoryDetailsComponent implements OnInit {  // A class that defin
       .then(() =>
         // Navigate to the testCategory page if the save is successful
         this.router.navigateByUrl('testCategory')
-          .catch((error) =>
-            console.log(error))
       )
       .catch((err) => console.log(err))
   }
@@ -105,8 +103,10 @@ export class CategoryDetailsComponent implements OnInit {  // A class that defin
     // Log a message to the console
     console.log('Reset Button Works ');
 
-    // Reset the categoryDetailsForm
-    this.categoryDetailsForm.reset();
+    this.categoryDetailsForm.patchValue({  // Use patchValue instead of reset to set specific values
+      categoryName: '',
+      active: false
+    });
 
     // Log a message to the console
     console.log('Form reset Sussesfully');
