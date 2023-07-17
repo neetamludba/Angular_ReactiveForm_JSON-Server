@@ -58,8 +58,6 @@ export class CategoryListDeletedComponent implements AfterViewInit{
         // Sorts the dataSource by a specified column using a MatSort.
         this.dataSource.sort = this.sort;
       })
-      .catch((error) => console.log(error))
-
   }
 
 

@@ -16,7 +16,7 @@ export class TestCategoryService {
 
   // private jsonServerURL = 'http://localhost:3000/test-category'; is the URL of the JSON server that this service will interact with. The server is running on localhost and is serving the /test-category endpoint.
   // The URL of the JSON server
-  private jsonServerURL = 'http://localhost:3000/test-category';
+  public jsonServerURL = 'http://localhost:3000/test-category';
 
   // headers and options are properties that define the headers to be used in HTTP requests, and the options to be used with those headers.
   // The headers for the HTTP requests
@@ -49,7 +49,6 @@ export class TestCategoryService {
       // If id is greater than 0, update an existing category
       const url = `${this.jsonServerURL}/${category.id}`;
       return this.http.put(url, category).toPromise()
-        .catch((ex) => console.log(ex));
     }
   }
 
@@ -59,7 +58,6 @@ export class TestCategoryService {
   async getCategory(categoryId: number): Promise<any> {
     return this.http.get(this.jsonServerURL + '/' + categoryId)
       .toPromise().then((testCategoryData) => testCategoryData)
-      .catch((ex) => console.log(ex));
   }
 
 
@@ -69,7 +67,6 @@ export class TestCategoryService {
   async getAllCategories(): Promise<any> {
     return this.http.get(this.jsonServerURL)
       .toPromise().then((testCategoryData) => testCategoryData)
-      .catch((ex) => console.log(ex));
   }
 
   // This function deletes the category data
@@ -82,7 +79,6 @@ export class TestCategoryService {
     const url = `${this.jsonServerURL}/${categoryId}`;
     return this.http.patch(url, { isDeleted: true }, this.options)
       .toPromise()
-      .catch((ex) => console.log(ex));
       
   }
 
@@ -90,7 +86,6 @@ export class TestCategoryService {
     const url = `${this.jsonServerURL}/${categoryId}`;
     return this.http.patch(url, { isDeleted: false }, this.options)
       .toPromise()
-      .catch((ex) => console.log(ex));
   }
 
 

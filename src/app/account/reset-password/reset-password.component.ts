@@ -69,7 +69,7 @@ export class ResetPasswordComponent implements OnInit {
         } else {
           this.loading = false;
           this.submitted = false;
-          this.router.navigateByUrl('account/reset-password-failed');
+          this.router.navigateByUrl('failed-reset-password');
         }
       })
       .catch((err) => {

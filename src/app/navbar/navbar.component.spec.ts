@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NavbarComponent } from './navbar.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,6 +15,7 @@ describe('NavbarComponent', () => {
   let component: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
   let accountService: AccountService;
+  let routerSpy: jasmine.SpyObj<Router>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -36,7 +37,10 @@ describe('NavbarComponent', () => {
     fixture = TestBed.createComponent(NavbarComponent);
     component = fixture.componentInstance;
     accountService = TestBed.inject(AccountService);
+    routerSpy = TestBed.inject(Router) as jasmine.SpyObj<Router>;
+
     spyOn(accountService, 'logout');
+
     fixture.detectChanges();
   });
 
@@ -67,5 +71,23 @@ describe('NavbarComponent', () => {
     expect(accountService.logout).toHaveBeenCalled();
   }
   );
+
+  it('should set the current page title', () => {
+    expect(component.currentPageTitle).toBe('');
+
+    component.ngOnInit();
+
+    expect(component.currentPageTitle).toBe('');
+  }
+  );
+
+
+  // it('should navigate to reset-password page on reset password',async () => {
+    
+  //   await
+  //   component.resetPassword();
+
+  //   expect(routerSpy.navigateByUrl).toHaveBeenCalledWith('/reset-password');
+  // });
 
 });

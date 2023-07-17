@@ -47,12 +47,13 @@ export class CategoryDetailsComponent implements OnInit {  // A class that defin
   showErrorMessage(fieldName: string) { // A method that returns an error message based on the form control's validation errors
     let errors = this.categoryDetailsForm.get(fieldName)?.errors; // Getting the validation errors of the specified form control
 
-    if (errors) { // Checking if there are validation errors
-
-      if (errors['required']) return 'Category name is required'; // Returning an error message for the 'required' validator
-      if (errors['minlength']) return 'Category name must be 5 characters long'; // Returning an error message for the 'minlength' validator
-      return '';
-    } else return '';
+    
+      if (errors && errors['required']) 
+      return 'Category name is required'; // Returning an error message for the 'required' validator
+      
+      if (errors && errors['minlength']) 
+      return 'Category name must be 5 characters long'; // Returning an error message for the 'minlength' validator
+     else return '';
   }
 
 
@@ -93,7 +94,6 @@ export class CategoryDetailsComponent implements OnInit {  // A class that defin
         // Navigate to the testCategory page if the save is successful
         this.router.navigateByUrl('testCategory')
       )
-      .catch((err) => console.log(err))
   }
 
   // This function resets the categoryDetailsForm and logs a message to the console
@@ -108,8 +108,6 @@ export class CategoryDetailsComponent implements OnInit {  // A class that defin
       active: false
     });
 
-    // Log a message to the console
-    console.log('Form reset Sussesfully');
   }
 
   // This function cancels the form and navigates to the testCategory page
@@ -117,7 +115,6 @@ export class CategoryDetailsComponent implements OnInit {  // A class that defin
   // Returns: None
   cancelForm() {
     // Navigate to the testCategory page
-    this.router.navigateByUrl('testCategory').catch((error) =>
-      console.log(error));
+    this.router.navigateByUrl('testCategory')
   }
 }

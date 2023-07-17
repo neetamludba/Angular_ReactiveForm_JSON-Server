@@ -105,6 +105,14 @@ describe('CategoryDetailsComponent', () => {
     expect(component.router.navigateByUrl).toHaveBeenCalledWith('testCategory');
   });
 
+  it('should cancel the form and navigate to the testCategory page', () => {
+    spyOn(component.router, 'navigateByUrl');
+
+    component.cancelForm();
+
+    expect(component.router.navigateByUrl).toHaveBeenCalledWith('testCategory');
+  });
+
   it('should reset the form', () => {
     spyOn(console, 'log');
 

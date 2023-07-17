@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit {
   public currentPageTitle: string = '';
   
   constructor(
-    private router: Router,
+    public router: Router,
     private activatedRoute: ActivatedRoute,
     private accountService: AccountService
   ) {}
@@ -64,7 +64,7 @@ export class NavbarComponent implements OnInit {
     return this.currentPageTitle;
   }
   resetPassword() {
-    this.router.navigateByUrl('/account/reset-password');
+    this.router.navigateByUrl('reset-password');
   }
 
   logout() {

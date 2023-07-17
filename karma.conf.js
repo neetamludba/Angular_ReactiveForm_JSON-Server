@@ -31,7 +31,7 @@ module.exports = function(config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/practicewebappjson'),
+      dir: require('path').join(__dirname, './.nyc_output'),
       subdir: '.',
       reporters: [
         { type: 'html' },

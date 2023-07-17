@@ -3,6 +3,6 @@ export interface Batch {
     batchName: string,
     startDate: string,
     active: boolean,
-    createdDate: string,
+    createdDate: Date,
     isDeleted: boolean
 }

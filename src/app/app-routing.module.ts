@@ -33,16 +33,16 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'account/reset-password',
+    path: 'reset-password',
     component: ResetPasswordComponent,
-    pathMatch: 'full',
+    // pathMatch: 'full',
     canActivate: [AuthGuard],
     data: { title: 'Reset Password' }
   },
   {
-    path: 'account/reset-password-failed',
+    path: 'failed-reset-password',
     component: ResetPasswordComponent,
-    pathMatch: 'full',
+    // pathMatch: 'full',
     canActivate: [AuthGuard],
     data: { title: 'Reset Password Failed' }
   },

@@ -19,7 +19,7 @@ import { QuestionDetailsComponent } from 'src/app/manage-question/question-detai
 export class TestDetailsComponent {
   constructor(
     private testService: TestService,
-    private route: ActivatedRoute,
+    public route: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog
   ) { }
@@ -29,7 +29,7 @@ export class TestDetailsComponent {
       Validators.required,
       Validators.minLength(5),
     ]),
-    categoryID: new FormControl(''),
+    categoryID: new FormControl(),
     active: new FormControl(true),
   });
 
@@ -75,7 +75,7 @@ export class TestDetailsComponent {
       if (errors['required']) return 'Test description is required';
       if (errors['minlength'])
         return 'Test description must be 5 characters long';
-      return '';
+      else return '';
     } else return '';
   }
 
@@ -83,7 +83,7 @@ export class TestDetailsComponent {
     this.dsQuestions.filter = value.trim().toLocaleLowerCase();
   }
 
-  doFilterDeleted (value: string) {
+  doFilterDeleted(value: string) {
     this.dsDeletedQuestions.filter = value.trim().toLocaleLowerCase();
   }
 
@@ -93,7 +93,6 @@ export class TestDetailsComponent {
       .then((categories) => {
         this.testCategories = categories;
       })
-      .catch((err) => console.log(err));
   }
 
   changeCategory(e: any) {
@@ -174,27 +173,26 @@ export class TestDetailsComponent {
       this.dsDeletedQuestions.sort = this.sort;
     })
   }
-  saveTest() {
+  async saveTest() {
     this.testQuestions = this.filteredTestQuestions.concat(this.deletedTestQuestions);
-    this.testService
-      .saveTest(
-        {
-          id: this.testId,
-          description: this.testDetailsForm.get('description')?.value,
-          categoryID: this.testDetailsForm.get('categoryID')?.value,
-          active: Boolean(this.testDetailsForm.get('active')?.value),
-          createdDate: this.testDate,
-          isDeleted: false,
-          questions: this.testQuestions.slice(),
-        },
-      )
-      .then(() =>
-        this.router.navigateByUrl('test').catch((error) => {
-          console.log(error);
-        })
-      )
-      .catch((ex) => console.log(ex));
+    try {
+      await this.testService
+        .saveTest(
+          {
+            id: this.testId,
+            description: this.testDetailsForm.get('description')?.value,
+            categoryID: this.testDetailsForm.get('categoryID')?.value,
+            active: Boolean(this.testDetailsForm.get('active')?.value),
+            createdDate: this.testDate,
+            isDeleted: false,
+            questions: this.testQuestions.slice(),
+          });
+
+      this.router.navigateByUrl('/test')
+    } catch (error) {
+      console.log(error);
   }
+}
 
   deleteQuestion(questionIndex: number) {
     const crntQuestion = this.filteredTestQuestions[questionIndex];
@@ -236,9 +234,7 @@ export class TestDetailsComponent {
 
 
   closeForm() {
-    this.router.navigateByUrl('test').catch((error) => {
-      console.log(error);
-    });
+    this.router.navigateByUrl('/test')
   }
 
 }

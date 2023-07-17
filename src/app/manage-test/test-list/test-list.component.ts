@@ -58,26 +58,23 @@ export class TestListComponent implements AfterViewInit {
       .then((categories) => {
         this.testCategories = categories;
       })
-      .catch((err) => console.log(err));
+
   }
 
   createTest() {
-    this.router.navigateByUrl('test/create').catch((error) => {
-      console.log(error);
-    });
+    this.router.navigateByUrl('/test/create')
+
   }
 
   deleteTest(testId: any) {
     this.testService.deleteTest(testId)
-      .catch((ex) => console.log(ex));
-
-    this.getAllTestCategories();
-    this.getAllTest();
+      .then(() => {
+        this.getAllTestCategories();
+        this.getAllTest();
+      })
   }
 
   gotoDeletedTests() {
-    this.router.navigateByUrl('test/deleted').catch((error) => {
-      console.log(error);
-    });
+    this.router.navigateByUrl('/test/deleted')
   }
 }

@@ -67,7 +67,7 @@ export class TestListDeletedComponent implements AfterViewInit {
         // Sorts the dataSource by a specified column using a MatSort.
         this.dataSource.sort = this.sort;
       })
-      .catch((error) => console.log(error))
+      
 
   }
 
@@ -77,7 +77,7 @@ export class TestListDeletedComponent implements AfterViewInit {
       .then((categories) => {
         this.testCategories = categories;
       })
-      .catch((err) => console.log(err));
+      
   }
 
 
@@ -86,15 +86,14 @@ export class TestListDeletedComponent implements AfterViewInit {
   unDeleteTest(testId: any) {
     // Calls the deleteCategory method from the testCategoryService with an object containing the categoryId and a flag isDeleted set to true.
     this.testService.unDeleteTest(testId)
-      .catch((ex) => console.log(ex));
+    
     this.getAllTestCategories();
     this.getAllDeletedTest();
 
   }
 
   backToTest() {
-    this.router.navigateByUrl('test').catch((error) =>
-      console.log(error));
+    this.router.navigateByUrl('/test')
   }
 
 }

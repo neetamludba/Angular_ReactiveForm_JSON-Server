@@ -98,6 +98,13 @@ describe('CategoryListComponent', () => {
     expect(routerSpy.navigateByUrl).toHaveBeenCalledWith('testCategory/create');
   });
 
+
+  it('should navigate to deleted categories on gotoDeletedCategories', () => {
+    component.gotoDeletedCategories();
+
+    expect(routerSpy.navigateByUrl).toHaveBeenCalledWith('testCategory/deleted');
+  });
+
   it('should navigate to edit category on editCategory', () => {
     const categoryId = 1;
     component.editCategory(categoryId);

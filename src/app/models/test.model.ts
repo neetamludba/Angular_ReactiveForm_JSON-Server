@@ -3,6 +3,6 @@ export interface Test {
     description: string;
     categoryID: number;
     active: boolean;
-    createdDate: string;
+    createdDate: Date;
     isDeleted: boolean;
 }
