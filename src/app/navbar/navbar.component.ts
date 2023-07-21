@@ -10,10 +10,10 @@ import { AccountService } from '../account/account.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  public currentPageTitle: string = '';
+  private currentPageTitle: string = '';
   
   constructor(
-    public router: Router,
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private accountService: AccountService
   ) {}

@@ -20,7 +20,7 @@ import { TestCategoryService } from '../test-category.service';
 export class CategoryListDeletedComponent implements AfterViewInit{
     
     constructor(
-      public router: Router,
+      private router: Router,
       private testCategoryService: TestCategoryService
     ) { } // A constructor that injects Router, ActivatedRoute, and TestCategoryService dependencies
   

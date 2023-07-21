@@ -13,7 +13,7 @@ import { formatDate } from '@angular/common';
 export class BatchDetailsComponent {
  
   constructor(
-    public router: Router,
+    private router: Router,
     private route: ActivatedRoute,
     private batchService: BatchService
   ) { } 

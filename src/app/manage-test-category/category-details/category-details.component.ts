@@ -15,7 +15,7 @@ import { formatDate } from '@angular/common';  // Importing formatDate function 
 export class CategoryDetailsComponent implements OnInit {  // A class that defines the behavior of the component and implements the OnInit interface
   
   constructor(
-    public router: Router,
+    private router: Router,
     private route: ActivatedRoute,
     private testCategoryService: TestCategoryService
   ) { } // A constructor that injects Router, ActivatedRoute, and TestCategoryService dependencies

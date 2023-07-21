@@ -86,7 +86,7 @@ describe('CategoryDetailsComponent', () => {
 
   it('should save the form data and navigate to the testCategory page', async () => {
     spyOn(testCategoryService, 'saveCategory').and.returnValue(Promise.resolve());
-    spyOn(component.router, 'navigateByUrl');
+    spyOn((component as any).router, 'navigateByUrl');
 
     component.categoryId = 1;
     component.categoryDetailsForm.controls['categoryName'].setValue('Test Category');
@@ -102,15 +102,15 @@ describe('CategoryDetailsComponent', () => {
       createdDate: '2023-06-27 10:00 AM',
       isDeleted: false
     });
-    expect(component.router.navigateByUrl).toHaveBeenCalledWith('testCategory');
+    expect((component as any).router.navigateByUrl).toHaveBeenCalledWith('testCategory');
   });
 
   it('should cancel the form and navigate to the testCategory page', () => {
-    spyOn(component.router, 'navigateByUrl');
+    spyOn((component as any).router, 'navigateByUrl');
 
     component.cancelForm();
 
-    expect(component.router.navigateByUrl).toHaveBeenCalledWith('testCategory');
+    expect((component as any).router.navigateByUrl).toHaveBeenCalledWith('testCategory');
   });
 
   it('should reset the form', () => {

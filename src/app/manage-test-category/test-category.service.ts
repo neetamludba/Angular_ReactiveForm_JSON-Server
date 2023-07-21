@@ -16,7 +16,7 @@ export class TestCategoryService {
 
   // private jsonServerURL = 'http://localhost:3000/test-category'; is the URL of the JSON server that this service will interact with. The server is running on localhost and is serving the /test-category endpoint.
   // The URL of the JSON server
-  public jsonServerURL = 'http://localhost:3000/test-category';
+  private jsonServerURL = 'http://localhost:3000/test-category';
 
   // headers and options are properties that define the headers to be used in HTTP requests, and the options to be used with those headers.
   // The headers for the HTTP requests

@@ -34,7 +34,7 @@ export class CategoryListComponent implements AfterViewInit {
 
   // The constructor method is called when the component is initialized and it injects the Router and TestCategoryService services into the component.
   constructor(
-    public router: Router,
+    private router: Router,
     private testCategoryService: TestCategoryService
   ) { }
 

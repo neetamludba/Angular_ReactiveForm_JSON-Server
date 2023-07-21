@@ -20,7 +20,8 @@ describe('BatchDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BatchDetailsComponent ],      imports: [
+      declarations: [ BatchDetailsComponent ],      
+      imports: [
         RouterTestingModule, 
         HttpClientTestingModule,
         MatCardModule,

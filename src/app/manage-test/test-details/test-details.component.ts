@@ -19,7 +19,7 @@ import { QuestionDetailsComponent } from 'src/app/manage-question/question-detai
 export class TestDetailsComponent {
   constructor(
     private testService: TestService,
-    public route: ActivatedRoute,
+    private route: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog
   ) { }

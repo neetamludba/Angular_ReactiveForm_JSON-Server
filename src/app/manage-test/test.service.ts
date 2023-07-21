@@ -63,37 +63,37 @@ export class TestService {
 
     if (test.id === 0) {
       delete test.id;
-      const testData = await lastValueFrom(this.http.post(this.jsonServerURLTest, test, this.options)).catch((ex) => console.log(ex));
+      const testData = await this.http.post(this.jsonServerURLTest, test, this.options).toPromise();
       testDataSave = testData as Test;
     } else {
       const url = `${this.jsonServerURLTest}/${test.id}`;
-      await lastValueFrom(this.http.put(url, test)).catch((ex) => console.log(ex));
+      await this.http.put(url, test).toPromise();
     }
-
+    const questionArry = [];
     if (this.questions.length > 0) {
       for (const question of this.questions) {
         if (question.id === 0) {
           delete question.id;
           if (testDataSave !== undefined) {
             question.testID = testDataSave.id;
-            await lastValueFrom(this.http.post(this.jsonServerURLQuestion, question, this.options)).catch((ex) => console.log(ex));
+            questionArry.push(await this.httpPostQuestion(question));
           }
         } else {
           const url = `${this.jsonServerURLQuestion}/${question.id}`;
-          await lastValueFrom(this.http.put(url, question)).catch((ex) => console.log(ex));
+          questionArry.push(await this.httpPutQuestion(url, question));
         }
       }
+      return questionArry
     }
+    return testDataSave
   }
 
+  private async httpPostQuestion(question: any): Promise<any> {
+    return this.http.post(this.jsonServerURLQuestion, question, this.options).toPromise();
+  }
 
-
-
-
-  // create a method to get json auto updated id of test when we post the data
-  async getTestID(): Promise<any> {
-    return this.http.get(this.jsonServerURLTest)
-      .toPromise().then((testData) => testData)
+  private async httpPutQuestion(url: string, question: any): Promise<any> {
+    return this.http.put(url, question).toPromise();
   }
 
   async deleteTest(testId: number): Promise<any> {
@@ -109,11 +109,9 @@ export class TestService {
     const url = `${this.jsonServerURLTest}/${testId}`;
     return this.http.patch(url, { isDeleted: false }, this.options)
       .toPromise()
-      .catch((ex) => {
-        console.log(ex)
-        throw ex
-      });
-  }
+
+  };
+
 
 
 }

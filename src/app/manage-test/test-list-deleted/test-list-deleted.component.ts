@@ -21,7 +21,7 @@ import { TestService } from '../test.service';
 export class TestListDeletedComponent implements AfterViewInit {
 
   constructor(
-    public router: Router,
+    private router: Router,
     private testService: TestService
   ) { }
 

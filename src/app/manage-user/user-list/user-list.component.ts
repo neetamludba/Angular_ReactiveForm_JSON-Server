@@ -44,7 +44,7 @@ export class UserListComponent implements AfterViewInit {
     });
   }
 
-  public doFilter(value: string) {
+  doFilter(value: string) {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
 

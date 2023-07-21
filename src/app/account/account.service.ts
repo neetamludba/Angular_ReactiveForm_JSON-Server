@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class AccountService {
   private userSubject: BehaviorSubject<any>;
-  public user: Observable<SessionUser>;
+  public  user: Observable<SessionUser>;
   userData: any;
 
 
@@ -24,11 +24,11 @@ export class AccountService {
     );
     this.user = this.userSubject.asObservable();
   }
-  public get userValue(): SessionUser {
+  private  get userValue(): SessionUser {
     return this.userSubject.value;
   }
 
-  public get token(): string {
+  private  get token(): string {
     return this.userSubject.value.token.accessToken;
   }
 

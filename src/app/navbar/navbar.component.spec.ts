@@ -73,11 +73,11 @@ describe('NavbarComponent', () => {
   );
 
   it('should set the current page title', () => {
-    expect(component.currentPageTitle).toBe('');
+    expect((component as any).currentPageTitle).toBe('');
 
     component.ngOnInit();
 
-    expect(component.currentPageTitle).toBe('');
+    expect((component as any).currentPageTitle).toBe('');
   }
   );
 
