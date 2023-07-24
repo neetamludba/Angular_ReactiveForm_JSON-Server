@@ -1,48 +1,60 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { NavbarComponent } from './navbar.component';
-import { ActivatedRoute, Router } from '@angular/router';
+import { NavigationEnd, Router, Event as RouterEvent } from '@angular/router';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { AccountService } from '../account/account.service';
-import { of } from 'rxjs';
+import { of, Subject } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
-
-class MockActivatedRoute { }
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
   let accountService: AccountService;
-  let routerSpy: jasmine.SpyObj<Router>;
+  let router: Router;
+  let routerEventsSubject: Subject<RouterEvent>;
 
   beforeEach(() => {
+    routerEventsSubject = new Subject<RouterEvent>();
+
     TestBed.configureTestingModule({
       declarations: [NavbarComponent],
       providers: [
         {
-          provide: ActivatedRoute, useClass: MockActivatedRoute, useValue: {
+          useValue: {
             data: of({ title: 'Test Title' }),
-            firstChild: null
-          }
+            firstChild: null,
+          },
         },
         {
           provide: AccountService,
-          useClass: AccountService
-        }
+          useClass: AccountService,
+        },
       ],
-      imports: [RouterTestingModule ,HttpClientTestingModule, MatToolbarModule, MatIconModule, MatMenuModule],
+      imports: [
+        RouterTestingModule,
+        HttpClientTestingModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatMenuModule,
+      ],
     }).compileComponents();
+
     fixture = TestBed.createComponent(NavbarComponent);
     component = fixture.componentInstance;
     accountService = TestBed.inject(AccountService);
-    routerSpy = TestBed.inject(Router) as jasmine.SpyObj<Router>;
+    router = TestBed.inject(Router);
 
     spyOn(accountService, 'logout');
 
+    // Set up the router events subscription with the routerEventsSubject
+    spyOnProperty(router, 'events').and.returnValue(routerEventsSubject.asObservable());
+
     fixture.detectChanges();
   });
+
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -81,13 +93,57 @@ describe('NavbarComponent', () => {
   }
   );
 
+  it('should set the current page title based on route data', fakeAsync(() => {
+    const navigationEndEvent = new NavigationEnd(
+      0,
+      'http://localhost:4200/reset-password',
+      'http://localhost:4200/reset-password'
+    );
 
-  // it('should navigate to reset-password page on reset password',async () => {
-    
-  //   await
-  //   component.resetPassword();
+ 
 
-  //   expect(routerSpy.navigateByUrl).toHaveBeenCalledWith('/reset-password');
-  // });
+    // Trigger the NavigationEnd event
+    routerEventsSubject.next(navigationEndEvent);
+    tick(); // Flush the observable to handle async operations
+
+
+    // Trigger ngOnInit manually
+    component.ngOnInit();
+
+    expect(component.getTitle()).toBe('Page Title');
+  }));
+
+
+
+  it('should set the userName based on localStorage data', () => {
+    const mockUser = [{ firstName: 'John', lastName: 'Doe' }];
+    spyOn(localStorage, 'getItem').and.returnValue(JSON.stringify(mockUser));
+
+    component.getUserName();
+
+    expect(component.userName).toBe('John Doe');
+  });
+  
+  it('should handle null or undefined userString in getUserName()', () => {
+    spyOn(localStorage, 'getItem').and.returnValue(null);
+
+    component.getUserName();
+
+    expect(component.userName).toBe('');
+  });
+
+  it('should call logout method of accountService on logout', () => {
+    component.logout();
+
+    expect(accountService.logout).toHaveBeenCalled();
+  });
+
+  it('should navigate to reset-password page on reset password', () => {
+    const routerSpy = spyOn((component as any).router, 'navigateByUrl');
+
+    component.resetPassword();
+
+    expect(routerSpy).toHaveBeenCalledWith('/reset-password');
+  });
 
 });

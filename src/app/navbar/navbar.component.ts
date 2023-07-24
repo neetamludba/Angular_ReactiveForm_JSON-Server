@@ -64,7 +64,7 @@ export class NavbarComponent implements OnInit {
     return this.currentPageTitle;
   }
   resetPassword() {
-    this.router.navigateByUrl('reset-password');
+    this.router.navigateByUrl('/reset-password');
   }
 
   logout() {

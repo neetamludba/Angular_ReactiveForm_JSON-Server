@@ -54,7 +54,7 @@
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-flat-button mat-dialog-close>Cancel</button>
-    <button mat-flat-button color="primary" (click)="saveQuestion()"
+    <button class="save-button" mat-flat-button color="primary" (click)="saveQuestion()"
         [disabled]="!questionDetailsForm.valid || !questionDetailsForm.dirty">
         Save
     </button>
