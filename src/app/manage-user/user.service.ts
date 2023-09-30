@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import * as bycrpt from 'bcryptjs';
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +28,18 @@ export class UserService {
   // Each of these methods returns a Promise that resolves with the data returned by the server or rejects with an error.
 
   async saveUser(user: any): Promise<any> {
-
+let hashPass = '';
+   await bycrpt.hash(user.password,10, (err,hash) =>{
+      if (err) {
+        console.error('Error hashing password:', err);
+      } else {
+        console.log('Hashed password:', hash);
+        hashPass = hash;
+      }
+    })
+user.hashPass = hashPass;
     console.table(user);
+
     if (user.id === 0) {
       // If id is 0, add a new user
       delete user.id; // Remove the id field to allow JSON server to auto-increment it

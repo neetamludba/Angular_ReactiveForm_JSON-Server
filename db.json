@@ -7,6 +7,14 @@
       "active": true,
       "createdDate": "2023-06-07 08:03 PM",
       "isDeleted": false
+    },
+    {
+      "batchName": "PL-00-2023",
+      "startDate": "2023-07-30T19:00:00.000Z",
+      "active": true,
+      "createdDate": "2023-08-15 09:02 PM",
+      "isDeleted": false,
+      "id": 2
     }
   ],
   "user": [
@@ -55,6 +63,19 @@
       "password": "I am a student",
       "batchId": 1,
       "registrationDate": "2022-10-05 11:56:23",
+      "active": true,
+      "isDeleted": false
+    },
+    {
+      "id": 5,
+      "email": "fk378753@gmail.com",
+      "password": "IAK@Ahmed",
+      "hashPass": "",
+      "firstName": "Muhammad",
+      "lastName": "Ahmed",
+      "batchId": "2",
+      "role": "Student",
+      "registrationDate": "2023-08-15 09:27 PM",
       "active": true,
       "isDeleted": false
     }

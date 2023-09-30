@@ -4,8 +4,9 @@ export interface User {
     firstName: string;
     lastName: string;
     password: string;
+    hashPass: string;
     role: string;
-    batchId: string;
+    batchId: number;
     registerationDate: Date;
     active: boolean;
     isDeleted: boolean;

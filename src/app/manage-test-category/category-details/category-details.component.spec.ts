@@ -65,8 +65,13 @@ describe('CategoryDetailsComponent', () => {
   it('should create the component', () => {
     expect(component).toBeTruthy();
   });
+
   it('should initialize the component with category details', waitForAsync(async () => {
+   
+    // Arrange: Wait for the form to be initialized.
     await fixture.whenStable();
+    
+    // Assert: Verify that the category name is correctly initialized.
 
     expect(component.categoryDetailsForm.get('categoryName')?.value).toBe(
       'Test Category'
@@ -74,6 +79,8 @@ describe('CategoryDetailsComponent', () => {
   }));
 
   it('should show an error message for the category name field', () => {
+    // Test showing error messages for category name validation.
+
     component.categoryDetailsForm.controls['categoryName'].setValue('');
     expect(component.showErrorMessage('categoryName')).toBe('Category name is required');
 
@@ -85,6 +92,8 @@ describe('CategoryDetailsComponent', () => {
   });
 
   it('should save the form data and navigate to the testCategory page', async () => {
+    // Test saving the form data and navigation.
+
     spyOn(testCategoryService, 'saveCategory').and.returnValue(Promise.resolve());
     spyOn((component as any).router, 'navigateByUrl');
 
@@ -106,6 +115,8 @@ describe('CategoryDetailsComponent', () => {
   });
 
   it('should cancel the form and navigate to the testCategory page', () => {
+    // Test canceling the form and navigation.
+
     spyOn((component as any).router, 'navigateByUrl');
 
     component.cancelForm();
@@ -114,6 +125,8 @@ describe('CategoryDetailsComponent', () => {
   });
 
   it('should reset the form', () => {
+    // Test resetting the form.
+
     spyOn(console, 'log');
 
     component.categoryDetailsForm.controls['categoryName'].setValue('Test Category');

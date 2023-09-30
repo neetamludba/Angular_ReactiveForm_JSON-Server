@@ -33,7 +33,7 @@ export class UserDetailsComponent implements AfterViewInit {
       Validators.required,
       Validators.minLength(5),
     ]),
-    batchId: new FormControl('', [Validators.required]),
+    batchId: new FormControl(0, [Validators.required]),
     active: new FormControl(true),
   });
 
@@ -72,7 +72,7 @@ export class UserDetailsComponent implements AfterViewInit {
         password: user.password,
         role: user.role,
         active: user.active,
-        batchId: user.batchId
+        batchId: Number(user.batchId)
       });
 
       this.userDetailsForm.controls['email'].disable();
@@ -87,7 +87,6 @@ export class UserDetailsComponent implements AfterViewInit {
       )
       .catch((err) => console.log(err));
   }
-
   changeBatch(e: any) {
     this.userDetailsForm.setValue(
       {
@@ -102,6 +101,8 @@ export class UserDetailsComponent implements AfterViewInit {
     );
   }
 
+
+
   saveUser() {
     // console.log(this.userDetailsForm.errors);
 
@@ -111,6 +112,7 @@ export class UserDetailsComponent implements AfterViewInit {
           id: this.userId,
           email: this.userDetailsForm.get('email')?.value,
           password: this.userDetailsForm.get('password')?.value,
+          hashPass: '',
           firstName: this.userDetailsForm.get('firstName')?.value,
           lastName: this.userDetailsForm.get('lastName')?.value,
           batchId: this.userDetailsForm.get('batchId')?.value?.toString(),
