@@ -10,6 +10,7 @@ import { ManageQuestionModule } from './manage-question/manage-question.module';
 import { ManageBatchModule } from './manage-batch/manage-batch.module';
 import { ManageUserModule } from './manage-user/manage-user.module';
 import { AccountModule } from './account/account.module';
+import { ManageTestAssignmentModule } from './manage-test-assignment/manage-test-assignment.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -40,6 +41,7 @@ import { MatMenuModule } from '@angular/material/menu';
     ManageUserModule,
     MatListModule,
     AccountModule,
+    ManageTestAssignmentModule,
     
     BrowserAnimationsModule,
     MatSidenavModule,

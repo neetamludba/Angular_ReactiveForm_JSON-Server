@@ -19,6 +19,7 @@ import { LoginComponent } from './account/login/login.component';
 
 import { AuthGuard } from './helpers/auth.guard';
 import { ResetPasswordComponent } from './account/reset-password/reset-password.component';
+import { TestAssignmentListComponent } from './manage-test-assignment/test-assignment-list/test-assignment-list.component';
 // Creating an array of routes for the application
 const routes: Routes = [
   {
@@ -112,6 +113,16 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [AuthGuard],
     data: { title: 'Edit Test' }
+  },
+  {
+    path: 'testassignment/:id',
+    component: TestAssignmentListComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    data: {
+      role: 'ROLE_ADMIN',
+      title: 'Test Assignment List',
+    },
   },
   {
     path: 'batch',

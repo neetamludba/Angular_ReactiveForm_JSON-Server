@@ -1,59 +1,62 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestDetailsComponent } from './test-details.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ActivatedRoute, Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
-import { TestService } from '../test.service';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { MatOptionModule } from '@angular/material/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
-import { MatTableModule } from '@angular/material/table';
-import { of } from 'rxjs';
-import { QuestionDetailsComponent } from 'src/app/manage-question/question-details/question-details.component';
-import { Question } from 'src/app/models/question.model';
-import { TestCategory } from 'src/app/models/category.model';
+// Step 1: Import necessary modules and components for testing.
+import { ComponentFixture, TestBed } from '@angular/core/testing'; // Angular testing utilities
+import { TestDetailsComponent } from './test-details.component'; // The component being tested
+import { HttpClientTestingModule } from '@angular/common/http/testing'; // Mock HttpClient for testing HTTP requests
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'; // Forms-related modules
+import { MatCardModule } from '@angular/material/card'; // Angular Material card module
+import { MatCheckboxModule } from '@angular/material/checkbox'; // Angular Material checkbox module
+import { MatFormFieldModule } from '@angular/material/form-field'; // Angular Material form field module
+import { MatInputModule } from '@angular/material/input'; // Angular Material input module
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Angular animations module
+import { ActivatedRoute, Router } from '@angular/router'; // Routing-related modules
+import { RouterTestingModule } from '@angular/router/testing'; // Mock Router module for testing
+import { TestService } from '../test.service'; // The service used in the component
+import { MatDialog, MatDialogModule } from '@angular/material/dialog'; // Angular Material dialog module
+import { MatOptionModule } from '@angular/material/core'; // Angular Material core module
+import { MatIconModule } from '@angular/material/icon'; // Angular Material icon module
+import { MatSelectModule } from '@angular/material/select'; // Angular Material select module
+import { MatTableModule } from '@angular/material/table'; // Angular Material table module
+import { of } from 'rxjs'; // RxJS observable
+import { QuestionDetailsComponent } from 'src/app/manage-question/question-details/question-details.component'; // Related component
+import { Question } from 'src/app/models/question.model'; // Model for questions
 
+// Step 2: Describe the test suite for the 'TestDetailsComponent'.
 describe('TestDetailsComponent', () => {
-  let component: TestDetailsComponent;
-  let fixture: ComponentFixture<TestDetailsComponent>;
-  let testService: TestService;
-  let dialog: MatDialog;
-  let router: Router;
-  let testDetailsForm: FormGroup;
+  let component: TestDetailsComponent; // Initialize the component being tested
+  let fixture: ComponentFixture<TestDetailsComponent>; // Initialize a test fixture for the component
+  let testService: TestService; // Initialize the service used in the component
+  let dialog: MatDialog; // Initialize the dialog service
+  let router: Router; // Initialize the router service
+  let testDetailsForm: FormGroup; // Initialize the form group for test details
 
+  // Step 3: Set up the testing environment before running the tests.
   beforeEach(async () => {
+    // Step 4: Create a form group for test details with a form control and validation
     testDetailsForm = new FormGroup({
       fieldName: new FormControl('', Validators.minLength(5))
     });
-    await TestBed.configureTestingModule({
 
-      declarations: [TestDetailsComponent],
+    await TestBed.configureTestingModule({
+      declarations: [TestDetailsComponent], // Declare the component to be tested
       imports: [
-        RouterTestingModule,
-        HttpClientTestingModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatSelectModule,
-        MatCheckboxModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        MatDialogModule,
-        MatOptionModule,
-        MatIconModule,
-        MatTableModule,
+        RouterTestingModule, // Import the mock RouterTestingModule
+        HttpClientTestingModule, // Import the mock HttpClientTestingModule for testing HTTP requests
+        MatCardModule, // Import Angular Material card module
+        MatFormFieldModule, // Import Angular Material form field module
+        MatInputModule, // Import Angular Material input module
+        MatSelectModule, // Import Angular Material select module
+        MatCheckboxModule, // Import Angular Material checkbox module
+        ReactiveFormsModule, // Import the ReactiveFormsModule for forms
+        BrowserAnimationsModule, // Import Angular animations module
+        MatDialogModule, // Import Angular Material dialog module
+        MatOptionModule, // Import Angular Material core module
+        MatIconModule, // Import Angular Material icon module
+        MatTableModule, // Import Angular Material table module
       ],
       providers: [
-        TestService,
+        TestService, // Provide the TestService as a dependency
         {
-          provide: ActivatedRoute,
+          provide: ActivatedRoute, // Provide a mock ActivatedRoute with a predefined 'id' parameter
           useValue: {
             snapshot: {
               paramMap: {
@@ -65,13 +68,13 @@ describe('TestDetailsComponent', () => {
       ],
     }).compileComponents();
 
+    fixture = TestBed.createComponent(TestDetailsComponent); // Create a fixture for the component
+    component = fixture.componentInstance; // Initialize the component from the fixture
+    testService = TestBed.inject(TestService); // Initialize the test service from TestBed
+    dialog = TestBed.inject(MatDialog); // Initialize the dialog service from TestBed
+    router = TestBed.inject(Router); // Initialize the router service from TestBed
 
-    fixture = TestBed.createComponent(TestDetailsComponent);
-    component = fixture.componentInstance;
-    testService = TestBed.inject(TestService);
-    dialog = TestBed.inject(MatDialog);
-    router = TestBed.inject(Router);
-
+    // Step 5: Create spies for service methods and set their return values
     spyOn(testService, 'getAllCategories').and.returnValue(
       Promise.resolve([
         { id: 1, categoryName: 'Category 1', active: true, createdDate: new Date(2023, 6, 12), isDeleted: false },
@@ -87,6 +90,7 @@ describe('TestDetailsComponent', () => {
         active: true,
       })
     );
+
     spyOn(testService, 'getMatchedTestQuestions').and.returnValue(
       Promise.resolve([
         {
@@ -109,11 +113,11 @@ describe('TestDetailsComponent', () => {
     );
   });
 
+  // Step 6: Run a test to ensure that the component is created successfully.
   it('should create', () => {
     fixture.detectChanges();
     expect(component).toBeTruthy();
   });
-
 
   it('should return an empty string when the field length is equal to 5', () => {
     // Arrange
@@ -231,6 +235,7 @@ describe('TestDetailsComponent', () => {
     ]);
     expect(component.testDetailsForm.dirty).toBeTrue();
   });
+
   it('should log the error when an error occurs during saving', async () => {
     // Arrange
     const testError = new Error('Test error');
@@ -255,19 +260,15 @@ describe('TestDetailsComponent', () => {
     // Assert
     expect(console.log).toHaveBeenCalledWith(undefined);
   });
+
   it('should save test', async () => {
     spyOn(testService, 'saveTest').and.stub();
-
     const navigateByUrlSpy = spyOn(component['router'], 'navigateByUrl');
     navigateByUrlSpy.and.stub();
-
     fixture.detectChanges();
     await fixture.whenStable();
-
     component.testDate = '2023-07-12 08:05 PM';
-
     component.saveTest();
-
 
     await expect(testService.saveTest).toHaveBeenCalledWith({
       id: 1,
@@ -297,8 +298,6 @@ describe('TestDetailsComponent', () => {
     });
 
     expect(navigateByUrlSpy).toHaveBeenCalledWith('/test')
-
-
   });
 
   it('should delete a question', () => {

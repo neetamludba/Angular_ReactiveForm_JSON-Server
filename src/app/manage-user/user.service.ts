@@ -28,8 +28,8 @@ export class UserService {
   // Each of these methods returns a Promise that resolves with the data returned by the server or rejects with an error.
 
   async saveUser(user: any): Promise<any> {
-let hashPass = '';
-   await bycrpt.hash(user.password,10, (err,hash) =>{
+    let hashPass = '';
+    await bycrpt.hash(user.password, 10, (err, hash) => {
       if (err) {
         console.error('Error hashing password:', err);
       } else {
@@ -37,7 +37,7 @@ let hashPass = '';
         hashPass = hash;
       }
     })
-user.hashPass = hashPass;
+    user.hashPass = hashPass;
     console.table(user);
 
     if (user.id === 0) {
@@ -62,13 +62,13 @@ user.hashPass = hashPass;
   }
 
   async getAllBatches(): Promise<any> {
-    
+
     return this.http.get(this.jsonServerURLbatch)
-    .toPromise().then((batchData) => batchData)
-    
-    .catch((ex) => console.log(ex));
+      .toPromise().then((batchData) => batchData)
+
+      .catch((ex) => console.log(ex));
   }
-  
+
 
 
   // This function gets all the users
@@ -76,6 +76,12 @@ user.hashPass = hashPass;
   // It returns a Promise that resolves with the users data or rejects with an error.
   async getAllUsers(): Promise<any> {
     return this.http.get(this.jsonServerURLUser)
+      .toPromise().then((userData) => userData)
+      .catch((ex) => console.log(ex));
+  }
+
+  async getAllActiveUsers(): Promise<any> {
+    return this.http.get(this.jsonServerURLUser+'/?active=true')
       .toPromise().then((userData) => userData)
       .catch((ex) => console.log(ex));
   }

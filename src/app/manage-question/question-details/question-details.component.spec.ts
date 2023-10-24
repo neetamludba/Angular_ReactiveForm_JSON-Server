@@ -1,60 +1,64 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+// Import necessary modules and components for testing.
+import { ComponentFixture, TestBed } from '@angular/core/testing'; // Angular testing utilities
+import { QuestionDetailsComponent } from './question-details.component'; // The component being tested
+import { HttpClientTestingModule } from '@angular/common/http/testing'; // Mock HttpClient for testing HTTP requests
+import { FormArray, ReactiveFormsModule } from '@angular/forms'; // Forms-related modules
+import { MatCardModule } from '@angular/material/card'; // Angular Material card module
+import { MatCheckboxModule } from '@angular/material/checkbox'; // Angular Material checkbox module
+import { MatFormFieldModule } from '@angular/material/form-field'; // Angular Material form field module
+import { MatInputModule } from '@angular/material/input'; // Angular Material input module
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Angular animations module
+import { ActivatedRoute } from '@angular/router'; // Routing-related module
+import { RouterTestingModule } from '@angular/router/testing'; // Mock RouterTestingModule for testing
+import { TestService } from 'src/app/manage-test/test.service'; // Service used in the component
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog'; // Angular Material dialog-related modules
+import { MatRadioModule } from '@angular/material/radio'; // Angular Material radio module
+import { MatIconModule } from '@angular/material/icon'; // Angular Material icon module
+import { AngularEditorConfig, AngularEditorModule } from '@kolkov/angular-editor'; // Angular editor module
+import { Question } from 'src/app/models/question.model'; // Model for questions
+import { By } from '@angular/platform-browser'; // Browser-specific utilities
+import { MatButtonModule } from '@angular/material/button'; // Angular Material button module
 
-import { QuestionDetailsComponent } from './question-details.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { FormArray, ReactiveFormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ActivatedRoute } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
-import { TestService } from 'src/app/manage-test/test.service';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatIconModule } from '@angular/material/icon';
-import { AngularEditorConfig, AngularEditorModule } from '@kolkov/angular-editor';
-import { Question } from 'src/app/models/question.model';
-import { By } from '@angular/platform-browser';
-import { MatButtonModule } from '@angular/material/button';
-
+// Describe the test suite for the 'QuestionDetailsComponent'.
 describe('QuestionDetailsComponent', () => {
-  let component: QuestionDetailsComponent;
-  let fixture: ComponentFixture<QuestionDetailsComponent>;
-  let mockDialogRef: jasmine.SpyObj<MatDialogRef<QuestionDetailsComponent>>;
+  let component: QuestionDetailsComponent; // Initialize the component being tested
+  let fixture: ComponentFixture<QuestionDetailsComponent>; // Initialize a test fixture for the component
+  let mockDialogRef: jasmine.SpyObj<MatDialogRef<QuestionDetailsComponent>>; // Initialize a mock MatDialogRef
 
+  // Set up the testing environment before running the tests.
   beforeEach(async () => {
+    // Create a mock MatDialogRef with a 'close' method
     mockDialogRef = jasmine.createSpyObj<MatDialogRef<QuestionDetailsComponent>>(
       ['close']
     );
+
+    // Configure the testing environment with TestBed
     await TestBed.configureTestingModule({
-      declarations: [QuestionDetailsComponent],
+      declarations: [QuestionDetailsComponent], // Declare the component to be tested
       imports: [
-        RouterTestingModule,
-        HttpClientTestingModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatCheckboxModule,
-        ReactiveFormsModule,
-        ReactiveFormsModule,
-        MatDialogModule,
-        MatRadioModule,
-        MatIconModule,
-        MatButtonModule,
-        AngularEditorModule,
-        BrowserAnimationsModule
-
-
+        RouterTestingModule, // Import the mock RouterTestingModule
+        HttpClientTestingModule, // Import the mock HttpClientTestingModule for testing HTTP requests
+        MatCardModule, // Import Angular Material card module
+        MatFormFieldModule, // Import Angular Material form field module
+        MatInputModule, // Import Angular Material input module
+        MatCheckboxModule, // Import Angular Material checkbox module
+        ReactiveFormsModule, // Import the ReactiveFormsModule for forms
+        MatDialogModule, // Import Angular Material dialog module
+        MatRadioModule, // Import Angular Material radio module
+        MatIconModule, // Import Angular Material icon module
+        MatButtonModule, // Import Angular Material button module
+        AngularEditorModule, // Import the Angular editor module
+        BrowserAnimationsModule // Import Angular animations module
       ],
       providers: [
-        TestService,
-        { provide: MatDialogRef, useValue: mockDialogRef }, // Use the mockDialogRef
+        TestService, // Provide the TestService as a dependency
 
-        // Provide the necessary provider for MatMdcDialogData using the MAT_DIALOG_DATA injection token
+        { provide: MatDialogRef, useValue: mockDialogRef }, // Use the mockDialogRef for MatDialog
+
+        // Provide the necessary provider for MAT_DIALOG_DATA using the MAT_DIALOG_DATA injection token
         { provide: MAT_DIALOG_DATA, useValue: {} },
-        
+
+        // Provide a mock ActivatedRoute with a predefined 'id' parameter
         {
           provide: ActivatedRoute,
           useValue: {
@@ -66,26 +70,22 @@ describe('QuestionDetailsComponent', () => {
           }
         }
       ]
+    }).compileComponents(); // Compile the component and its template
 
-    })
-      .compileComponents();
-
-    fixture = TestBed.createComponent(QuestionDetailsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    fixture = TestBed.createComponent(QuestionDetailsComponent); // Create a fixture for the component
+    component = fixture.componentInstance; // Initialize the component from the fixture
+    fixture.detectChanges(); // Trigger change detection for the component
   });
 
+  // Set up the component before running individual tests
   beforeEach(() => {
-
-    // Spy on the dialogRef.close() method
-    // spyOn((component as any).dialogRef, 'close');
-
-    // Set initial value for errorMessage
+    // Set the initial value for errorMessage
     component.errorMessage = '';
   });
 
+  // Run a test to ensure that the component is created successfully.
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component).toBeTruthy(); // Expect that the component is truthy (it exists)
   });
 
   it('should invalidate the form when the question field is empty', () => {
@@ -396,5 +396,5 @@ describe('QuestionDetailsComponent', () => {
     expect(component.saveQuestion).toHaveBeenCalled();
   });
 
- 
+
 });

@@ -60,14 +60,6 @@ describe('NavbarComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should set userName based on localStorage data', () => {
-    const mockUser = [{ firstName: 'John', lastName: 'Doe' }];
-    spyOn(localStorage, 'getItem').and.returnValue(JSON.stringify(mockUser));
-
-    component.getUserName();
-
-    expect(component.userName).toBe('John Doe');
-  });
 
   it('should handle null or undefined userString in getUserName', () => {
     spyOn(localStorage, 'getItem').and.returnValue(null);
@@ -112,7 +104,6 @@ describe('NavbarComponent', () => {
 
     expect(component.getTitle()).toBe('Page Title');
   }));
-
 
 
   it('should set the userName based on localStorage data', () => {

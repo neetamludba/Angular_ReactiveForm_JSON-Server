@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Add Assignment</h2>
+<mat-dialog-content [formGroup]="assignmentDetailsForm">
+  <mat-form-field appearance="fill">
+    <mat-label>User</mat-label>
+    <mat-select (change)="changeUser($event)" formControlName="assignedTo">
+      <mat-option>None</mat-option>
+      <mat-option *ngFor="let u of users" [value]="u.id">
+        {{ u.firstName + " " + u.lastName }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button mat-dialog-close>Cancel</button>
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="addAssignment()"
+    [disabled]="!assignmentDetailsForm.valid || !assignmentDetailsForm.dirty"
+  >
+    Save
+  </button>
+</mat-dialog-actions>
