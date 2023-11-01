@@ -17,13 +17,15 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MyAssignmentListComponent } from './my-assignment-list/my-assignment-list.component';
 
 
 
 @NgModule({
   declarations: [
     TestAssignmentListComponent,
-    TestAssignmentDetailComponent
+    TestAssignmentDetailComponent,
+    MyAssignmentListComponent
   ],
   imports: [
     CommonModule,

@@ -11,12 +11,12 @@ import { AccountService } from '../account/account.service';
 })
 export class NavbarComponent implements OnInit {
   private currentPageTitle: string = '';
-  
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private accountService: AccountService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.router.events
@@ -28,8 +28,8 @@ export class NavbarComponent implements OnInit {
           this.currentPageTitle = data['title'] ?? 'Page Title';
         });
       });
-      this.getUserName();
-      
+    this.getUserName();
+
   }
   userName: string = '';
 
@@ -37,20 +37,15 @@ export class NavbarComponent implements OnInit {
     const userString = localStorage.getItem('user');
     if (userString) {
       const userObject = JSON.parse(userString);
-      if (Array.isArray(userObject) && userObject.length > 0) {
-        this.userName = userObject[0].firstName + ' ' + userObject[0].lastName;
+      // console.log(userObject)
+      if (userObject) {
+        this.userName = userObject.userObject.firstName + ' ' + userObject.userObject.lastName;
+        // console.log(this.userName)
       } else {
-        // Handle case where userObject is not an array or is empty
-        // Display an appropriate error or fallback value
       }
     } else {
-      // Handle case where userString is null or undefined
-      // Display an appropriate error or fallback value
     }
   }
-  
-
-  
 
   getChild(activatedRoute: ActivatedRoute): ActivatedRoute {
     if (activatedRoute.firstChild) {

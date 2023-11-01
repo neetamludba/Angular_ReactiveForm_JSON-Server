@@ -1,15 +1,11 @@
 <div class="wrapper" *ngIf="user">
-  <div class="sidebar">
-    <app-navigation></app-navigation>
+  <div class="sidebar" [ngClass]="{'minimized': isSmallScreen && !isExpanded, 'expanded': isExpanded}">
+    <app-navigation (toggle)="toggleSidebar()"></app-navigation>
   </div>
   <div>
     <div class="main-panel">
-      <app-navbar></app-navbar>
+      <app-navbar (toggle)="toggleSidebar()"></app-navbar>
       <router-outlet></router-outlet>
     </div>
   </div>
-</div>
-
-<div class="wrapper" *ngIf="user == null">
-<router-outlet></router-outlet>
 </div>

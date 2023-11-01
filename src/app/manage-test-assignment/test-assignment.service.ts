@@ -74,16 +74,21 @@ export class TestAssignmentService {
     const user = await this.getUser(assignment.assignedToID);
     if (user) {
       assignment.assignedToName = user.firstName + ' ' + user.lastName
-    } 
+    }
     return this.http.post(this.jsonServerURLAssignment, assignment)
       .toPromise().then((count) => count)
       .catch((ex) => console.log(ex));
   }
 
-  async getAllAssignmentsForUser(userID: number) {
-    return this.http.get(this.jsonServerURLAssignment + '/?assignedToID=' + userID)
-      .toPromise().then((assignments) => assignments)
-      .catch((ex) => console.log(ex));
+  async getAllAssignmentsForUser(userID: number): Promise<TestAssignment[]> {
+    try {
+      const response = await this.http.get(this.jsonServerURLAssignment + '/?assignedToID=' + userID).toPromise();
+      const assignments: TestAssignment[] = response as TestAssignment[];
+      return assignments;
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
   }
 
 }

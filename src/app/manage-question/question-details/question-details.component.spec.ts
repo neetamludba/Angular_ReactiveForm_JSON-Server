@@ -48,7 +48,7 @@ describe('QuestionDetailsComponent', () => {
         MatIconModule, // Import Angular Material icon module
         MatButtonModule, // Import Angular Material button module
         AngularEditorModule, // Import the Angular editor module
-        BrowserAnimationsModule // Import Angular animations module
+        BrowserAnimationsModule, // Import Angular animations module
       ],
       providers: [
         TestService, // Provide the TestService as a dependency

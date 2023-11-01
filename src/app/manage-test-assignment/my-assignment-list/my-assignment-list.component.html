@@ -1,0 +1,59 @@
+<div class="main-content">
+    <div class="mat-elevation-z8">
+      <div class="filterBar">
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            placeholder="Filter"
+            (keyup)="doFilter($any($event).target.value)"
+          />
+        </mat-form-field>
+      </div>
+      <table class="listtable" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="testDescription">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Test Description
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.testDescription }}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="assignedDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Assignment Date
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.assignedDate | date }}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <button
+              mat-flat-button
+              color="primary"
+              (click)="startNewAttempt(element.id)"
+              *ngIf="!element.attempted"
+            >
+              New Attempt
+            </button>
+            <button
+              mat-flat-button
+              color="primary"
+              (click)="viewAttempt(element.id)"
+              *ngIf="element.attempted"
+            >
+              View Attempt
+            </button>
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  </div>
+  

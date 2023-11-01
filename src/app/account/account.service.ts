@@ -24,11 +24,11 @@ export class AccountService {
     );
     this.user = this.userSubject.asObservable();
   }
-  private  get userValue(): SessionUser {
+  public  get userValue(): SessionUser | any {
     return this.userSubject.value;
   }
 
-  private  get token(): string {
+  public  get token(): string {
     return this.userSubject.value.token.accessToken;
   }
 

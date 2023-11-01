@@ -45,10 +45,10 @@ describe('NavigationComponent', () => {
     expect(toolbar.nativeElement.textContent).toContain('Portia Lab');
   });
 
-  it('should have four list items in the sidenav content', () => {
+  it('should have five list items in the sidenav content', () => {
     const sidenavContent = fixture.debugElement.query(By.directive(MatSidenavContent));
     const listItems = sidenavContent.queryAll(By.directive(MatListItem));
-    expect(listItems.length).toBe(4);
+    expect(listItems.length).toBe(5);
   });
 });
 

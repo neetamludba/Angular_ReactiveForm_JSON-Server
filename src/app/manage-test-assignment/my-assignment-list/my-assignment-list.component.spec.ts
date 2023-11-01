@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TestAssignmentListComponent } from './test-assignment-list.component';
+
+import { MyAssignmentListComponent } from './my-assignment-list.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,18 +9,14 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TestAssignmentService } from '../test-assignment.service';
-import { ActivatedRoute } from '@angular/router';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
-describe('TestAssignmentListComponent', () => {
-  let component: TestAssignmentListComponent;
-  let fixture: ComponentFixture<TestAssignmentListComponent>;
+describe('MyAssignmentListComponent', () => {
+  let component: MyAssignmentListComponent;
+  let fixture: ComponentFixture<MyAssignmentListComponent>;
   let testAssignmentService: TestAssignmentService;
-  let dialog: MatDialog; // Initialize the dialog service
-
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TestAssignmentListComponent],
+      declarations: [MyAssignmentListComponent],
       imports: [
         MatIconModule, // Import Angular Material icon module
         MatFormFieldModule, // Import Angular Material form field module
@@ -27,29 +24,15 @@ describe('TestAssignmentListComponent', () => {
         MatInputModule, // Import Angular Material input module
         MatTableModule, // Import Angular Material table module
         MatSortModule, // Import Angular Material sorting module
-        BrowserAnimationsModule, // Import Angular animations module
-        MatDialogModule
-      ],
-      providers: [
-        TestAssignmentService,
-        // Provide ActivatedRoute as a service
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            snapshot: {
-              paramMap: {
-                get: (param: string) => '1' // Set the 'id' parameter value to '1'
-              }
-            }
-          }
-        },
-      ],
-    }).compileComponents(); // Compile the component and its template
+        BrowserAnimationsModule // Import Angular animations module
+      ]
+    })
+      .compileComponents(); // Compile the component and its template
 
-    fixture = TestBed.createComponent(TestAssignmentListComponent);
+    fixture = TestBed.createComponent(MyAssignmentListComponent);
     component = fixture.componentInstance;
-    dialog = TestBed.inject(MatDialog); // Initialize the dialog service from TestBed
     testAssignmentService = TestBed.inject(TestAssignmentService); // Initialize the test service from TestBed
+
     fixture.detectChanges();
   });
 

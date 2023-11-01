@@ -92,7 +92,7 @@ describe('NavbarComponent', () => {
       'http://localhost:4200/reset-password'
     );
 
- 
+
 
     // Trigger the NavigationEnd event
     routerEventsSubject.next(navigationEndEvent);
@@ -107,14 +107,14 @@ describe('NavbarComponent', () => {
 
 
   it('should set the userName based on localStorage data', () => {
-    const mockUser = [{ firstName: 'John', lastName: 'Doe' }];
+    const mockUser = { userObject: { firstName: 'Asad', lastName: 'Ali' } } ;
     spyOn(localStorage, 'getItem').and.returnValue(JSON.stringify(mockUser));
 
     component.getUserName();
 
-    expect(component.userName).toBe('John Doe');
+    expect(component.userName).toBe('Asad Ali');
   });
-  
+
   it('should handle null or undefined userString in getUserName()', () => {
     spyOn(localStorage, 'getItem').and.returnValue(null);
 
