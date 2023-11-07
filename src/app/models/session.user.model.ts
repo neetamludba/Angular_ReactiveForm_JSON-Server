@@ -4,4 +4,5 @@ export interface SessionUser {
     lastName: string;
     email: string;
     role: string;
+    batch: string;
 }

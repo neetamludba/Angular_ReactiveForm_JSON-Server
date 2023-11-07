@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import * as bycrpt from 'bcryptjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +9,10 @@ export class UserService {
     private http: HttpClient
   ) { }
 
-  // private jsonServerURL = 'http://localhost:3000/user'; is the URL of the JSON server that this service will interact with. The server is running on localhost and is serving the /test-user endpoint.
+  // private jsonServerURL = 'http://localhost:4000/user'; is the URL of the JSON server that this service will interact with. The server is running on localhost and is serving the /test-user endpoint.
   // The URL of the JSON server
-  private jsonServerURLUser = 'http://localhost:3000/user';
-  private jsonServerURLbatch = 'http://localhost:3000/batch';
+  private jsonServerURLUser = 'http://localhost:4000/user';
+  private jsonServerURLbatch = 'http://localhost:4000/batch';
   // headers and options are properties that define the headers to be used in HTTP requests, and the options to be used with those headers.
   // The headers for the HTTP requests
   headers = new HttpHeaders({
@@ -28,16 +27,6 @@ export class UserService {
   // Each of these methods returns a Promise that resolves with the data returned by the server or rejects with an error.
 
   async saveUser(user: any): Promise<any> {
-    let hashPass = '';
-    await bycrpt.hash(user.password, 10, (err, hash) => {
-      if (err) {
-        console.error('Error hashing password:', err);
-      } else {
-        console.log('Hashed password:', hash);
-        hashPass = hash;
-      }
-    })
-    user.hashPass = hashPass;
     console.table(user);
 
     if (user.id === 0) {

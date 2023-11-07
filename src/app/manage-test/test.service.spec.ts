@@ -75,7 +75,7 @@ describe('TestService', () => {
 
     // Act: Call the service function and set up an HTTP request expectation.
     const promise = service.getAllCategories();
-    const req = httpTestingController.expectOne('http://localhost:3000/test-category');
+    const req = httpTestingController.expectOne('http://localhost:4000/test-category');
     expect(req.request.method).toBe('GET');
     req.flush(expectedData);
 
@@ -108,7 +108,7 @@ describe('TestService', () => {
     },]
     // Act: Call the service function and set up an HTTP request expectation.
     const promise = service.getMatchedTestQuestions(testID);
-    const req = httpTestingController.expectOne('http://localhost:3000/test-question/?testID=1');
+    const req = httpTestingController.expectOne('http://localhost:4000/test-question/?testID=1');
     expect(req.request.method).toBe('GET');
     req.flush(expectedData);
 
@@ -127,7 +127,7 @@ describe('TestService', () => {
 
     // Act: Call the service function and set up an HTTP request expectation.
     const promise = service.getTest(testID);
-    const req = httpTestingController.expectOne('http://localhost:3000/test/1');
+    const req = httpTestingController.expectOne('http://localhost:4000/test/1');
     expect(req.request.method).toBe('GET');
     req.flush(expectedData);
 
@@ -146,7 +146,7 @@ describe('TestService', () => {
 
     // Act: Call the service function and set up an HTTP request expectation.
     const promise = service.getAllTest();
-    const req = httpTestingController.expectOne('http://localhost:3000/test');
+    const req = httpTestingController.expectOne('http://localhost:4000/test');
     expect(req.request.method).toBe('GET');
     req.flush(expectedData);
 
@@ -245,7 +245,7 @@ describe('TestService', () => {
 
     // Act: Call the service function and set up an HTTP request expectation.
     // Note: Using 'any' to access the private methods
-    const promise = (service as any).httpPutQuestion('http://localhost:3000/test-question/1', question);
+    const promise = (service as any).httpPutQuestion('http://localhost:4000/test-question/1', question);
     const req = httpTestingController.expectOne(`${(service as any).jsonServerURLQuestion}/${question.id}`);
     expect(req.request.method).toEqual('PUT');
     req.flush(questionArray);
@@ -288,7 +288,7 @@ describe('TestService', () => {
     const expectedData = { id: 1, description: 'Test 1', categoryID: 1, active: true, createdDate: new Date(12 - 7 - 2023), isDeleted: false };
     // Act: Call the service function and set up an HTTP request expectation.
     const promise = service.deleteTest(testID);
-    const req = httpTestingController.expectOne('http://localhost:3000/test/1');
+    const req = httpTestingController.expectOne('http://localhost:4000/test/1');
     expect(req.request.method).toBe('PATCH');
     req.flush(expectedData);
 
@@ -319,7 +319,7 @@ describe('TestService', () => {
 
     // Act: Call the service function and set up an HTTP request expectation.
     const promise = service.unDeleteTest(testID);
-    const req = httpTestingController.expectOne('http://localhost:3000/test/1');
+    const req = httpTestingController.expectOne('http://localhost:4000/test/1');
     expect(req.request.method).toBe('PATCH');
     req.flush(expectedData);
     // Assert: Verify the data returned by the service.

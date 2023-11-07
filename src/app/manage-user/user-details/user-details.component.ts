@@ -112,7 +112,6 @@ export class UserDetailsComponent implements AfterViewInit {
           id: this.userId,
           email: this.userDetailsForm.get('email')?.value,
           password: this.userDetailsForm.get('password')?.value,
-          hashPass: '',
           firstName: this.userDetailsForm.get('firstName')?.value,
           lastName: this.userDetailsForm.get('lastName')?.value,
           batchId: this.userDetailsForm.get('batchId')?.value?.toString(),

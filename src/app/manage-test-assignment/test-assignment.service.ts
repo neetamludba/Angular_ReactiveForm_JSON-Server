@@ -14,11 +14,11 @@ export class TestAssignmentService {
     private http: HttpClient
   ) { }
 
-  // private jsonServerURL = 'http://localhost:3000/test-category'; is the URL of the JSON server that this service will interact with. The server is running on localhost and is serving the /test-category endpoint.
+  // private jsonServerURL = 'http://localhost:4000/test-category'; is the URL of the JSON server that this service will interact with. The server is running on localhost and is serving the /test-category endpoint.
   // The URL of the JSON server
-  private jsonServerURLAssignment = 'http://localhost:3000/test-assignment';
-  private jsonServerURLTest = 'http://localhost:3000/test';
-  private jsonServerURLUser = 'http://localhost:3000/user';
+  private jsonServerURLAssignment = 'http://localhost:4000/test-assignment';
+  private jsonServerURLTest = 'http://localhost:4000/test';
+  private jsonServerURLUser = 'http://localhost:4000/user';
 
 
   // headers and options are properties that define the headers to be used in HTTP requests, and the options to be used with those headers.
@@ -31,10 +31,16 @@ export class TestAssignmentService {
   options = { headers: this.headers };
 
 
-  async getAssignment(assignmentIID: number) {
-    return this.http.get(this.jsonServerURLAssignment + assignmentIID)
-      .toPromise().then((assignment) => assignment)
-      .catch((ex) => console.log(ex));
+  async getAssignment(assignmentID: number): Promise<TestAssignment | null> {
+    try {
+      const response = await this.http.get(this.jsonServerURLAssignment +'/'+ assignmentID)
+        .toPromise();
+      const assignment: TestAssignment = response as TestAssignment;
+      return assignment
+    } catch (error) { 
+      console.log(error)
+      return null
+    }
   }
 
   async getTest(testID: number): Promise<Test | null> {

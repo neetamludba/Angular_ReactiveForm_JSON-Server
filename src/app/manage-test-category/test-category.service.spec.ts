@@ -73,7 +73,7 @@ describe('TestCategoryService', () => {
 
     // Act
     const promise = service.saveCategory(category);
-    const req = httpTestingController.expectOne('http://localhost:3000/test-category');
+    const req = httpTestingController.expectOne('http://localhost:4000/test-category');
     expect(req.request.method).toBe('POST');
     req.flush(expectedResponse);
 
@@ -95,7 +95,7 @@ describe('TestCategoryService', () => {
 
     // Act
     const promise = service.saveCategory(category);
-    const req = httpTestingController.expectOne('http://localhost:3000/test-category/1');
+    const req = httpTestingController.expectOne('http://localhost:4000/test-category/1');
     expect(req.request.method).toBe('PUT');
     req.flush(expectedResponse);
 
@@ -112,7 +112,7 @@ describe('TestCategoryService', () => {
 
     // Act
     const promise = service.getCategory(categoryID);
-    const req = httpTestingController.expectOne('http://localhost:3000/test-category/1');
+    const req = httpTestingController.expectOne('http://localhost:4000/test-category/1');
     expect(req.request.method).toBe('GET');
     req.flush(expectedData);
 
@@ -146,7 +146,7 @@ describe('TestCategoryService', () => {
 
     // Act
     const promise = service.unDeleteCategory(categoryID);
-    const req = httpTestingController.expectOne('http://localhost:3000/test-category/1');
+    const req = httpTestingController.expectOne('http://localhost:4000/test-category/1');
     expect(req.request.method).toBe('PATCH');
     req.flush(expectedData);
 

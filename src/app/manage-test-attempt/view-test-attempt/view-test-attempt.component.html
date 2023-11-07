@@ -1,0 +1,71 @@
+<div class="main-content">
+    <div class="mat-elevation-z8" style="padding: 8px">
+        <div style="width: 100%; text-align: center">
+            <h2>{{ testDescription }}</h2>
+            <div *ngIf="userName != null">
+                <h3>Last Attempt of <span style="font-weight: bold;">{{userName}}</span>
+                </h3>
+            </div>
+        </div>
+        <div *ngFor="let qNA of questionsAnswers; let i = index">
+            <mat-card style="margin-bottom: 10px">
+                <mat-card-content>
+                    <div style="margin-bottom: 10px; font-weight: bold">
+                        Q{{ i + 1 }}:<div [innerHTML]="qNA.question"></div>
+                        <!-- {{ qNA.question }} -->
+                    </div>
+
+                    <div>
+                        <mat-radio-group style="display: flex; flex-direction: column" *ngIf="qNA.questionType == 1">
+                            <ng-container *ngFor="let answer of qNA.options.split(','); let i = index">
+                                <mat-radio-button style="margin: 5px" value="{{ i }}"
+                                    checked="{{ i.toString() === qNA.answer }}" disabled="true" class="{{
+                      i.toString() === qNA.answer
+                        ? qNA.correctAnswers.split(',')[i] === 'true'
+                          ? 'correctAnswer'
+                          : 'wrongAnswer'
+                        : ''
+                    }}">{{ answer }}&nbsp;&nbsp;
+                                    <mat-icon>
+                                        {{
+                                        i.toString() === qNA.answer
+                                        ? qNA.correctAnswers.split(",")[i] === "true"
+                                        ? "check"
+                                        : "close"
+                                        : ""
+                                        }}
+                                    </mat-icon>
+                                </mat-radio-button>
+                            </ng-container>
+                        </mat-radio-group>
+
+                        <ng-container *ngIf="qNA.questionType == 2">
+                            <div>
+                                <ng-container *ngFor="let answer of qNA.options.split(','); let i = index">
+                                    <mat-checkbox style="display: flex; margin: 5px"
+                                        [checked]="qNA.answer.includes(i.toString())" disabled="true" class="{{
+                        qNA.answer.includes(i.toString())
+                          ? qNA.correctAnswers.split(',')[i] === 'true'
+                            ? 'correctAnswer'
+                            : 'wrongAnswer'
+                          : ''
+                      }}">{{ answer }}&nbsp;&nbsp;
+                                        <mat-icon>
+                                            {{
+                                            i.toString() === qNA.answer
+                                            ? qNA.correctAnswers.split(",")[i] === "true"
+                                            ? "check"
+                                            : "close"
+                                            : ""
+                                            }}
+                                        </mat-icon>
+                                    </mat-checkbox>
+                                </ng-container>
+                            </div>
+                        </ng-container>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

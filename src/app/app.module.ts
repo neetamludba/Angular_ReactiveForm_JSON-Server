@@ -11,6 +11,7 @@ import { ManageBatchModule } from './manage-batch/manage-batch.module';
 import { ManageUserModule } from './manage-user/manage-user.module';
 import { AccountModule } from './account/account.module';
 import { ManageTestAssignmentModule } from './manage-test-assignment/manage-test-assignment.module';
+import { ManageTestAttemptModule } from './manage-test-attempt/manage-test-attempt.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -42,6 +43,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatListModule,
     AccountModule,
     ManageTestAssignmentModule,
+    ManageTestAttemptModule,
     
     BrowserAnimationsModule,
     MatSidenavModule,

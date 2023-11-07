@@ -1,0 +1,66 @@
+<div class="main-content">
+    <h1 class="test-heading">{{ testName }}</h1>
+    <div class="mat-elevation-z8">
+      <mat-card *ngIf="currentQuestionIndex > -1">
+        <mat-card-content style="min-height: 200px">
+          <div style="margin-bottom: 10px; font-weight: bold">
+            Q{{ currentQuestionIndex + 1 }}:
+            <div [innerHTML]="questions[currentQuestionIndex].question"></div>
+            <!-- {{ questions[currentQuestionIndex].question }} -->
+          </div>
+  
+          <div>
+            <mat-radio-group style="display: flex; flex-direction: column"
+              [formControl]="answerControl(currentQuestionIndex)"
+              *ngIf="questions[currentQuestionIndex].questionType == 1">
+              <ng-container *ngFor="
+                  let answer of questions[currentQuestionIndex].options.split(
+                    ','
+                  );
+                  let index = index
+                ">
+                <mat-radio-button style="margin: 5px" value="{{ index }}">{{
+                  answer
+                  }}</mat-radio-button>
+              </ng-container>
+            </mat-radio-group>
+  
+            <ng-container *ngIf="questions[currentQuestionIndex].questionType == 2">
+              <div [formGroup]="answerGroup(currentQuestionIndex)">
+                <ng-container *ngFor="
+                    let answer of questions[currentQuestionIndex].options.split(
+                      ','
+                    );
+                    let index = index
+                  ">
+                  <mat-checkbox formControlName="chk_{{ index }}" style="display: flex; margin: 5px"
+                    value="{{ index }}">{{ answer }}
+                  </mat-checkbox>
+                </ng-container>
+              </div>
+            </ng-container>
+          </div>
+        </mat-card-content>
+        <mat-card-actions style="text-align: end">
+          <button mat-flat-button color="secondary" class="attemptnavbutton" (click)="goBackToQuestion()"
+            *ngIf="currentQuestionIndex > 0">
+            Back
+          </button>
+          <button mat-flat-button color="primary" class="attemptnavbutton" (click)="gotoNextQuestion()" *ngIf="
+              currentQuestionIndex < questions.length - 1 &&
+              !questions[currentQuestionIndex].mandatory
+            ">
+            Skip
+          </button>
+          <button mat-flat-button color="primary" class="attemptnavbutton" (click)="gotoNextQuestion()"
+            [disabled]="!answerControl(currentQuestionIndex).valid" *ngIf="currentQuestionIndex < questions.length - 1">
+            Next
+          </button>
+          <button mat-flat-button color="primary" (click)="submitAttempt()"
+            *ngIf="currentQuestionIndex == questions.length - 1">
+            Finish
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>

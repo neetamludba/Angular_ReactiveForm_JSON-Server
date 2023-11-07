@@ -21,6 +21,9 @@ import { AuthGuard } from './helpers/auth.guard';
 import { ResetPasswordComponent } from './account/reset-password/reset-password.component';
 import { TestAssignmentListComponent } from './manage-test-assignment/test-assignment-list/test-assignment-list.component';
 import { MyAssignmentListComponent } from './manage-test-assignment/my-assignment-list/my-assignment-list.component';
+import { TestAttemptDetailsComponent } from './manage-test-attempt/test-attempt-details/test-attempt-details.component';
+import { ViewTestAttemptComponent } from './manage-test-attempt/view-test-attempt/view-test-attempt.component';
+import { TestAttemptStatsComponent } from './manage-test-attempt/test-attempt-stats/test-attempt-stats.component';
 // Creating an array of routes for the application
 const routes: Routes = [
   {
@@ -133,6 +136,36 @@ const routes: Routes = [
     data: {
       role: 'ROLE_USER',
       title: 'My Tests',
+    },
+  },
+  {
+    path: 'testattempt/create/:id',
+    component: TestAttemptDetailsComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    data: {
+      role: 'ROLE_ADMIN',
+      title: 'Test Attempt Details',
+    },
+  },
+  {
+    path: 'testattempt/view/:id',
+    component: ViewTestAttemptComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    data: {
+      role: 'ROLE_ADMIN',
+      title: 'Test Attempt Details',
+    },
+  },
+  {
+    path: 'testattemptstats/:id',
+    component: TestAttemptStatsComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    data: {
+      role: 'ROLE_ADMIN',
+      title: 'Test Attempt Statistics',
     },
   },
   {

@@ -11,13 +11,13 @@ export class TestService {
     private http: HttpClient
   ) { }
 
-  // private jsonServerURL = 'http://localhost:3000/test'; is the URL of the JSON server that this service will interact with. The server is running on localhost and is serving the /test endpoint.
+  // private jsonServerURL = 'http://localhost:4000/test'; is the URL of the JSON server that this service will interact with. The server is running on localhost and is serving the /test endpoint.
   // The URL of the JSON server
-  private jsonServerURLTest = 'http://localhost:3000/test';
+  private jsonServerURLTest = 'http://localhost:4000/test';
 
-  private jsonServerURLTestCategory = 'http://localhost:3000/test-category';
+  private jsonServerURLTestCategory = 'http://localhost:4000/test-category';
 
-  private jsonServerURLQuestion = 'http://localhost:3000/test-question';
+  private jsonServerURLQuestion = 'http://localhost:4000/test-question';
 
   questions: any;
   // headers and options are properties that define the headers to be used in HTTP requests, and the options to be used with those headers.

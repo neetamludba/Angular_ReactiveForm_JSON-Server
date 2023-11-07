@@ -36,7 +36,7 @@
               mat-flat-button
               color="primary"
               (click)="startNewAttempt(element.id)"
-              *ngIf="!element.attempted"
+              *ngIf="element.attempted === false"
             >
               New Attempt
             </button>
@@ -44,7 +44,7 @@
               mat-flat-button
               color="primary"
               (click)="viewAttempt(element.id)"
-              *ngIf="element.attempted"
+              *ngIf="element.attempted === true"
             >
               View Attempt
             </button>
